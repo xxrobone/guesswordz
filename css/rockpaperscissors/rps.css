@@ -40,17 +40,20 @@ form {
     align-items: center;
 }
 
-form > h2 {
-    margin-top: 2rem;
+ h2 {
+    margin: 2rem  auto 0;
     font-family: Bebas;
     font-size: calc(4vmin + 2vmax);    
     font-weight: 100;
+    text-align: center;
     filter: drop-shadow(2px 2px rgba(255, 255, 255, 0.247));
 }
 
-.radio_wrapper {
-    margin: 1rem 0;
-    display: block;
+.choices_wrapper {
+    width: 100%;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 label {
@@ -119,6 +122,12 @@ i {
     color: aquamarine;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
+}
+
+i:hover {
+    color: aquamarine;
+    filter: drop-shadow(1px 3px 2px rgba(191, 138, 221, 0.808));
+    cursor: pointer;
 }
 
 i.small {

@@ -4,7 +4,8 @@ const body = document.body;
 let result = document.querySelector('.alert_box');
 let playerPointsTxt = document.querySelector('#player-points');
 let botPointsTxt = document.querySelector('#bot-points');
-const btn = document.querySelector('.submit_btn');
+/* const btn = document.querySelector('.submit_btn'); */
+let choices = document.querySelectorAll('.choices_wrapper > ul > li > i');
 
 const game = document.querySelector('.game');
 
@@ -47,8 +48,24 @@ function botChoice() {
   }
 }
 
-function playerChoice() {
-  let choice = document.querySelector('input[name="radio"]:checked').value;
+choices.forEach((i) => {
+  console.log(i.id);
+  i.addEventListener('click', (e) => {
+    let pl = e.target.id;
+    console.log(pl);
+    e.preventDefault();
+
+    playerChoice(pl);
+    botChoice();
+    gameUI(playerUI(player), botUI(bot));
+    console.log('player variable is now: ' + player);
+    gameRound(player, bot);
+  });
+});
+
+function playerChoice(choice) {
+  /*  let choice = document.querySelector('input[name="radio"]:checked').value; */
+
   if (choice === 'rock') {
     console.log('player choice rock');
     player = 'rock';
@@ -107,7 +124,7 @@ function gameUI(playerIcon, botIcon) {
     }, 3000); */
   } else {
     game.append(playerIcon, botIcon);
-   /*  setTimeout(function () {
+    /*  setTimeout(function () {
       playerIcon.classList.remove('player_icon');
       botIcon.classList.remove('bot_icon');
       game.remove(playerIcon, botIcon);
@@ -115,15 +132,6 @@ function gameUI(playerIcon, botIcon) {
     }, 3000); */
   }
 }
-
-btn.addEventListener('click', (e) => {
-  e.preventDefault();
-  playerChoice();
-  botChoice();
-  gameUI(playerUI(player), botUI(bot));
-  console.log('player variable is now: ' + player);
-  gameRound(player, bot);
-});
 
 function gameRound(player, bot) {
   if (player === 'rock' || player === 'scissors' || player === 'paper') {
