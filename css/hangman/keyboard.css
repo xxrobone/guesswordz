@@ -1,0 +1,50 @@
+.keyboard {
+    margin: 0 auto;
+    max-width: 400px;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    gap: 0.25rem;
+    align-self: stretch;
+  }
+  
+  .key_btn {
+    border: 1px solid orangered;
+    background-color: #232428;
+    color: lightgray;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    transition: background 0.2s ease-in-out;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  .key_btn:hover:not(:disabled),
+  .key_btn:focus:not(:disabled) {
+    background-color: #382828;
+    color: white;
+    filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.459));
+  }
+  
+  .key_btn.active {
+    border: 1px solid lightgreen;
+    background-color: #225a36;
+    color: rgb(255, 255, 255);
+  }
+  .key_btn.active:hover {
+    background-color: lightgreen;
+    color: rgb(255, 255, 255);
+  }
+  
+  .key_btn.inactive {
+    border: 1px solid rgb(121, 3, 3);
+    background-color: #888;
+    color: black;
+    opacity: 0.3;
+  }
+  .key_btn.inactive:hover {
+    background-color: red;
+    opacity: 0.5;
+  }
+  
