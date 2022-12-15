@@ -4,6 +4,11 @@
 @import url('./../nav.css');
 
 
+main {
+    width: 100%;
+margin: 2rem auto;
+}
+
 .welcome {
     width: 100%;
     height: 200px;
