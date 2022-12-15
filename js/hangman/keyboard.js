@@ -4,6 +4,7 @@ function theKeyboard() {
   const inactive = 'inactive';
 
   const keyboard = document.querySelector('.keyboard');
+  const inputWord = document.querySelector('.input_word');
 
   const keyboardKeys = [
     'a',
@@ -38,7 +39,12 @@ function theKeyboard() {
     const button = document.createElement('button');
     button.classList.add('key_btn');
     button.textContent = l;
-    keyboard.append(button);
+      keyboard.append(button);
+      
+      button.addEventListener('click', function () {
+          let l = this.textContent
+          inputWord.append(l)
+      })
   });
 }
 
