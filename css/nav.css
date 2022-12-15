@@ -18,5 +18,6 @@ li {
 
 li > a {
     text-decoration: none;
+    color: var(--color);
     font-size: clamp(1.5rem, 2.5vw, 4rem);
 }
