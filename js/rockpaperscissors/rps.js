@@ -4,10 +4,10 @@ const body = document.body;
 let result = document.querySelector('.alert_box');
 let playerPointsTxt = document.querySelector('#player-points');
 let botPointsTxt = document.querySelector('#bot-points');
-/* const btn = document.querySelector('.submit_btn'); */
+const startGame = document.querySelector('.start');
 let choices = document.querySelectorAll('.choices_wrapper > ul > li > i');
 
-const game = document.querySelector('.game');
+let game = document.querySelector('.game');
 
 result.textContent = 'Result';
 // player vs bot & result
@@ -48,18 +48,21 @@ function botChoice() {
   }
 }
 
-choices.forEach((i) => {
-  console.log(i.id);
-  i.addEventListener('click', (e) => {
-    let pl = e.target.id;
-    console.log(pl);
-    e.preventDefault();
+startGame.addEventListener('click', function () {
+  choices.forEach((i) => {
+    i.classList.add('active');
+    console.log(i.id);
+    i.addEventListener('click', (e) => {
+      let pl = e.target.id;
+      console.log(pl);
+      e.preventDefault();
 
-    playerChoice(pl);
-    botChoice();
-    gameUI(playerUI(player), botUI(bot));
-    console.log('player variable is now: ' + player);
-    gameRound(player, bot);
+      playerChoice(pl);
+      botChoice();
+      gameUI(playerUI(player), botUI(bot));
+      console.log('player variable is now: ' + player);
+      gameRound(player, bot);
+    });
   });
 });
 
