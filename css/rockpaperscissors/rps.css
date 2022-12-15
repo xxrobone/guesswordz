@@ -1,0 +1,163 @@
+@import url("../typography.css");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #121212;
+    color: rgb(28, 172, 172);
+    width: 100vw;
+    height: 100vh;
+}
+header {
+    margin-top: 2rem;
+    height: 100px;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+p {
+    font-family: Coolvetica;
+    text-align: center;
+}
+
+h1 {
+    font-size: calc(2vmin + 2.5vmax);
+    font-family: Coffee;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+form {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form > h2 {
+    margin-top: 2rem;
+    font-family: Bebas;
+    font-size: calc(4vmin + 2vmax);    
+    font-weight: 100;
+    filter: drop-shadow(2px 2px rgba(255, 255, 255, 0.247));
+}
+
+.radio_wrapper {
+    margin: 1rem 0;
+    display: block;
+}
+
+label {
+    position: relative;
+    margin: 0 2rem;
+}
+
+input[type="radio"] {
+    /* Add if not using autoprefixer */
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+    /* For iOS < 15 to remove gradient background */
+    background-color: transparent;
+    /* Not removed via appearance */
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    border: .15rem solid aqua;
+    border: .15rem solid transparent;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+  }
+
+  input[type="radio"]:checked ~ i {
+    color: white;
+    filter: drop-shadow(5px 3px rgb(49, 133, 41));
+  }
+  /* input[type="radio"]:checked::before {
+    transform: scale(1);
+    background-color: white;
+   
+  } */
+
+  .submit_btn {
+    margin: 1rem 0;
+    padding: 8px 16px;
+    border: none;
+    outline: none;
+    font-family: bebas;
+    font-weight: 800;
+    text-align: center;
+    color: black;
+    transition: background-color 0.4s ease-in-out, color 0.6s ease; 
+    cursor: pointer;
+ }
+  .submit_btn:hover {
+    background-color: #c3f3ed;
+    color: #476305;
+ }
+
+.game {
+    position: relative;
+    margin: 0 auto;
+    width: 500px;
+    height: 400px;
+    background: #000;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 5px 5px 20px rgba(10, 228, 228, 0.103);
+}
+
+i {
+    font-size: calc(4vmin + 2vmax);
+    color: aquamarine;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+i.small {
+    font-size: calc(3vmin + 1vmax);
+    filter: drop-shadow(1px 1px 1px aqua);
+    color: black;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.bot_icon {
+    position: absolute;
+    transform: rotate(-90deg) scaleX(-1);
+    right: 35%;
+    color: orangered;
+}
+
+.player_icon {
+    position: absolute;
+    transform: rotate(90deg);
+    left: 35%;
+}
+
+.draw {
+    transform: rotate(0deg) translateX(20%);
+    color: rgba(214, 214, 49, 0.938);
+}
+
+.players {
+    font-size: calc(4vmin + 2vmax);
+    text-shadow: 2px 2px 3px rgba(255, 68, 0, 0.452);
+    margin: 0;
+    display: flex;
+    justify-content: space-evenly;
+    text-transform: uppercase;
+    font-family: Bebas;
+}
+
+.alert_box {
+    font-family: Bebas;
+    font-size: calc(1.5vmin + 2vmax);    
+    font-weight: 100;
+    text-align: center;
+}

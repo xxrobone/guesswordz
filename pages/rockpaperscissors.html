@@ -5,12 +5,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games - Rock Paper Scissors</title>
+    <link rel="stylesheet" href="../css/rockpaperscissors/rps.css">
+    <script src="https://kit.fontawesome.com/d3412194f0.js" crossorigin="anonymous"></script>
+    <title>Rock paper scissors</title>
 </head>
 
 <body>
-    <h1>Rock paper scissors</h1>
+    <header>
+        <h1>Rock <i class="fa-solid fa-hand-fist small"></i> - Paper <i class="fa-solid fa-hand small"></i> - Scissors
+            <i class="fa-solid fa-hand-peace small"></i>
+        </h1>
+    </header>
+    <p>A game of rock paper scissors, first to 5 points wins</p>
+    <div class="modal">
+        <div class="msg"></div>
 
+    </div>
+    <form>
+        <h2>Pick a choice</h2>
+        <div class="radio_wrapper">
+            <label for="rock" id="rock_label">
+                <input type="radio" id="rock" name="radio" value="rock" title="rock" />
+                <i class="fa-solid fa-hand-fist"></i>
+            </label>
+            <label for="paper" id="paper_label">
+                <input type="radio" id="paper" name="radio" value="paper" title="paper">
+                <i class="fa-solid fa-hand"></i>
+            </label>
+            <label for="scissors" id="scissors_label">
+                <input type="radio" id="scissors" name="radio" value="scissors" title="scissors">
+                <i class="fa-solid fa-hand-peace"></i>
+            </label>
+        </div>
+        <button type="submit" class="submit_btn">Submit</button>
+    </form>
+    <div class="alert_box"></div>
+    <div class="players">
+        <h4>player: <span id="player-points">0</span></h4>
+        <h4>bot: <span id="bot-points">0</span></h4>
+    </div>
+    <div class="game">
+        <!-- <div class="bot">
+            <i class="fa-solid fa-hand-fist"></i>
+            <i class="fa-solid fa-hand"></i>
+            <i class="fa-solid fa-hand-peace"></i>
+        </div>
+        <div class="player">
+            <i class="fa-solid fa-hand-fist"></i>
+            <i class="fa-solid fa-hand"></i>
+            <i class="fa-solid fa-hand-peace"></i>
+        </div> -->
+    </div>
+
+
+    <script src="../js/rockpaperscissors/rps.js"></script>
 </body>
 
 </html>
