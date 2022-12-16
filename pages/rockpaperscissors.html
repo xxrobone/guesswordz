@@ -15,8 +15,8 @@
         <h2>GAMEZ</h2>
         <ul>
             <li><a href="../index.html">Home</a></li>
-            <li><a href="./hangman.html">Hangman</a></li>
             <li><a href="./rockpaperscissors.html">Rock paper scissors</a></li>
+            <li><a href="./hangman.html">Hangman</a></li>
             <li><a href="./wordle.html">Wordle</a></li>
         </ul>
     </nav>
@@ -26,10 +26,13 @@
         </h1>
     </header>
     <p>A game of rock paper scissors, first to 5 points wins</p>
-    <div class="modal">
-        <div class="msg"></div>
+    <!--  <div class="modal">
+    </div> -->
+    <button class="start btn">Play Game</button>
+    <div class="score">
+        <h4>player: <span id="player">0</span></h4>
+        <h4>bot: <span id="bot">0</span></h4>
     </div>
-    <button class="start">Play Game</button>
     <h2>Pick a choice</h2>
     <div class="choices_wrapper">
         <ul>
@@ -38,12 +41,9 @@
             <li> <i id="scissors" class="fa-solid fa-hand-peace"></i></li>
         </ul>
     </div>
+    <div class="show_result">
 
-    <div class="players">
-        <h4>player: <span id="player-points">0</span></h4>
-        <h4>bot: <span id="bot-points">0</span></h4>
-    </div>
-    <div class="game">
+        <h2 class="show_text"></h2>
         <!-- <div class="bot">
             <i class="fa-solid fa-hand-fist"></i>
             <i class="fa-solid fa-hand"></i>
@@ -54,8 +54,10 @@
             <i class="fa-solid fa-hand"></i>
             <i class="fa-solid fa-hand-peace"></i>
         </div> -->
-        <div class="alert_box"></div>
+        <div class="show_icon"></div>
     </div>
+    <button class="restart btn">Restart</button>
+
 
 
     <script src="../js/rockpaperscissors/rps.js"></script>

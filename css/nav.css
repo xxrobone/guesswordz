@@ -8,6 +8,7 @@ nav {
 }
 
 nav > h2 {
+    color: white;
     padding: 0.25rem 0.5rem;
 }
 
@@ -24,7 +25,7 @@ nav > ul > li {
 }
 
 nav > ul > li > a {
-    font-family: Coffee;
+    font-family: Coolvetica;
     text-decoration: none;
     color: var(--color);
     font-size: clamp(1rem, 2.5vw, 2rem);

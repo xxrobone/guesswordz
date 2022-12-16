@@ -1,22 +1,36 @@
 console.log('js connected');
 
-const body = document.body;
-let result = document.querySelector('.alert_box');
-let playerPointsTxt = document.querySelector('#player-points');
-let botPointsTxt = document.querySelector('#bot-points');
+const showResult = document.querySelector('.show_result');
+const showIcon = document.querySelector('.show_icon');
+const showText = document.querySelector('.show_text');
+let playerScore = document.querySelector('#player');
+let botScore = document.querySelector('#bot');
 const startGame = document.querySelector('.start');
+const restart = document.querySelector('.restart');
 let choices = document.querySelectorAll('.choices_wrapper > ul > li > i');
 
-let game = document.querySelector('.game');
+const score = {
+  player: 0,
+  bot: 0,
+};
 
-result.textContent = 'Result';
-// player vs bot & result
+startGame.addEventListener('click', gamePlay);
 
-let player;
-let bot;
-
-let playerPoints = 0;
-let botPoints = 0;
+function gamePlay() {
+  restart.style.display = 'block';
+  choices.forEach((i) => {
+    i.classList.add('active');
+    i.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('player choice is: ' + e.target.id);
+      const player = e.target.id;
+      playerChoice(player);
+      const bot = botChoice();
+      gameUI(playerUI(player), botUI(bot));
+      gameRound(player, bot);
+    });
+  });
+}
 
 function createIcon(input, className) {
   input = document.createElement('i');
@@ -30,44 +44,8 @@ const scissors = createIcon('scissors', 'fa-hand-peace');
 
 let choicesArr = ['rock', 'paper', 'scissors'];
 
-function botChoice() {
-  const randomNum = Math.floor(Math.random() * 3) + 1;
-
-  switch (randomNum) {
-    case 1:
-      bot = choicesArr[0];
-      break;
-    case 2:
-      bot = choicesArr[1];
-      break;
-    case 3:
-      bot = choicesArr[2];
-      break;
-    default:
-      break;
-  }
-}
-
-startGame.addEventListener('click', function () {
-  choices.forEach((i) => {
-    i.classList.add('active');
-    console.log(i.id);
-    i.addEventListener('click', (e) => {
-      let pl = e.target.id;
-      console.log(pl);
-      e.preventDefault();
-
-      playerChoice(pl);
-      botChoice();
-      gameUI(playerUI(player), botUI(bot));
-      console.log('player variable is now: ' + player);
-      gameRound(player, bot);
-    });
-  });
-});
-
 function playerChoice(choice) {
-  /*  let choice = document.querySelector('input[name="radio"]:checked').value; */
+  let player = '';
 
   if (choice === 'rock') {
     console.log('player choice rock');
@@ -81,6 +59,26 @@ function playerChoice(choice) {
   } else {
     console.log('you must choose');
   }
+  return player;
+}
+
+function botChoice() {
+  let bot = '';
+  const randomNum = Math.floor(Math.random() * 3) + 1;
+  switch (randomNum) {
+    case 1:
+      bot = choicesArr[0];
+      break;
+    case 2:
+      bot = choicesArr[1];
+      break;
+    case 3:
+      bot = choicesArr[2];
+      break;
+    default:
+      break;
+  }
+  return bot;
 }
 
 function playerUI(playerInput) {
@@ -92,6 +90,7 @@ function playerUI(playerInput) {
   } else {
     playerOutput = scissors;
   }
+  console.log(playerOutput);
   return playerOutput;
 }
 
@@ -104,43 +103,43 @@ function botUI(botInput) {
   } else {
     botOutput = scissors;
   }
+  console.log(botOutput);
   return botOutput;
 }
 
 function gameUI(playerIcon, botIcon) {
-  game.classList.add('game');
-  body.appendChild(game);
-
-  game.innerHTML = '';
-
   // adding class to player and bot transform
-  playerIcon.classList.add('player_icon');
-  botIcon.classList.add('bot_icon');
 
   if (playerIcon === botIcon) {
     playerIcon.classList.add('draw');
-    game.append(playerIcon);
-    /* setTimeout(function () {
+    botIcon.classList.add('draw');
+    showIcon.append(playerIcon, botIcon);
+    setTimeout(() => {
       playerIcon.classList.remove('draw');
-      game.remove(playerIcon);
-      console.log('icons removed');
-    }, 3000); */
+      botIcon.classList.remove('draw');
+    }, 2500);
   } else {
-    game.append(playerIcon, botIcon);
-    /*  setTimeout(function () {
+    playerIcon.classList.add('player_icon');
+    botIcon.classList.add('bot_icon');
+    showIcon.append(playerIcon, botIcon);
+    setTimeout(() => {
       playerIcon.classList.remove('player_icon');
       botIcon.classList.remove('bot_icon');
-      game.remove(playerIcon, botIcon);
-      console.log('icons removed');
-    }, 3000); */
+    }, 2500);
   }
 }
 
 function gameRound(player, bot) {
+  showResult.style.display = 'flex';
+  setTimeout(() => {
+    showIcon.innerHTML = '';
+    showText.textContent = '';
+    showResult.style.display = 'none';
+  }, 3000);
+
   if (player === 'rock' || player === 'scissors' || player === 'paper') {
-    // result
     if (player === bot) {
-      result.textContent = 'Its a draw';
+      showText.textContent = 'Its a draw';
       console.log(
         '%c Player choice: ' +
           player +
@@ -149,101 +148,59 @@ function gameRound(player, bot) {
           '\n\nIt´s a Draw!',
         'background: #222; color: #ffd500'
       );
-      /*  alert(
-      'Player choice: ' + player + '\nBot choice: ' + bot + '\nIt´s a Draw!'
-    ); */
     } else if (player === 'rock' && bot === 'scissors') {
-      result.textContent = 'You Win!';
-      playerPoints++;
-      playerPointsTxt.textContent = playerPoints;
+      showText.textContent = 'You Win!';
+      score.player++;
+      playerScore.textContent = score.player;
       console.log(
         '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
         'background: #222; color: #90ee90'
       );
-      /*  alert('Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!'); */
     } else if (player === 'scissors' && bot === 'paper') {
-      result.textContent = 'You Win!';
-      playerPoints++;
-      playerPointsTxt.textContent = playerPoints;
+      showText.textContent = 'You Win!';
+      score.player++;
+      playerScore.textContent = score.player;
       console.log(
         '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
         'background: #222; color: #90ee90'
       );
-      /* alert('Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!'); */
     } else if (player === 'paper' && bot === 'rock') {
-      result.textContent = 'You Win!';
-      playerPoints++;
-      playerPointsTxt.textContent = playerPoints;
+      showText.textContent = 'You Win!';
+      score.player++;
+      playerScore.textContent = score.player;
       console.log(
         '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
         'background: #222; color: #90ee90'
       );
-      /* alert('Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!'); */
     } else {
-      result.textContent = 'You Loose!';
-      botPoints++;
-      botPointsTxt.textContent = botPoints;
+      showText.textContent = 'You Loose!';
+      score.bot++;
+      botScore.textContent = score.bot;
       console.log(
         '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Loose!',
         'background: #222; color: #D2042D'
       );
-      /*  alert('Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Loose!'); */
     }
   } else {
     console.log('No Choice is made must choose, rock or paper or scissors!');
   }
 }
 
-// game loop
-/* while (playerPoints <= 5 || botPoints <= 5) {
-  player = prompt(
-    'play a round of rock, paper, scissors!' +
-      '\nChoose rock, paper or scissors'
-  );
-  botChoice();
-} */
-/* 
-if (player === 'rock' || player === 'scissors' || player === 'paper') {
-  // result
-  if (player === bot) {
-    console.log(
-      '%c Player choice: ' +
-        player +
-        '\nBot choice: ' +
-        bot +
-        '\n\nIt´s a Draw!',
-      'background: #222; color: #ffd500'
-    );
-    alert(
-      'Player choice: ' + player + '\nBot choice: ' + bot + '\nIt´s a Draw!'
-    );
-  } else if (player === 'rock' && bot === 'scissors') {
-    console.log(
-      '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
-      'background: #222; color: #90ee90'
-    );
-    alert('Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!');
-  } else if (player === 'scissors' && bot === 'paper') {
-    console.log(
-      '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
-      'background: #222; color: #90ee90'
-    );
-    alert('Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!');
-  } else if (player === 'paper' && bot === 'rock') {
-    console.log(
-      '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
-      'background: #222; color: #90ee90'
-    );
-    alert('Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!');
-  } else {
-    console.log(
-      '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Loose!',
-      'background: #222; color: #D2042D'
-    );
-    alert('Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Loose!');
+function clearResult(e) {
+  if (e.target == showResult) {
+    showResult.style.display = 'none';
   }
-} else {
-  console.log('You must write, rock or paper or scissors!');
-  alert('You must write, rock or paper or scissors!');
 }
- */
+
+window.addEventListener('click', clearResult);
+
+function gameReset() {
+  score.player = 0;
+  score.bot = 0;
+  playerScore.textContent = score.player;
+  botScore.textContent = score.bot;
+  showResult.style.display = 'none';
+  restart.style.display = 'none';
+}
+
+restart.addEventListener('click', gameReset);
