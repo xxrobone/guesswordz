@@ -136,19 +136,21 @@ i.small {
 .player_icon {
     position: absolute;
     transform: rotate(90deg);
-    left: 25%;
+    left: 30%;
+    right: auto;
     color: lightgreen;
     animation-name: showPlayer;
-    animation-duration: 0.8s;
+    animation-duration: .8s;
 }
 
 .bot_icon {
     position: absolute;
     transform: rotate(-90deg) scaleX(-1);
-    right: 25%;
+    right: 30%;
+    left: auto;
     color: orangered;
     animation-name: showBot;
-    animation-duration: 0.8s;
+    animation-duration: .8s;
 }
 
 
@@ -156,6 +158,8 @@ i.small {
 .draw {
     position: absolute;
     color: rgba(214, 214, 49, 0.938);
+    animation-name: showDraw;
+    animation-duration: .8s;
 }
 
 .score {
@@ -230,6 +234,16 @@ i.small {
   
     to {
         transform: translateX(0px);
+    }
+  }
+
+@keyframes showDraw {
+    from {
+      transform: translateY(500px);
+    }
+  
+    to {
+        transform: translateY(0px);
     }
   }
 
