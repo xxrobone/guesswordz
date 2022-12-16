@@ -1,5 +1,3 @@
-console.log('js connected');
-
 const showResult = document.querySelector('.show_result');
 const showIcon = document.querySelector('.show_icon');
 const showText = document.querySelector('.show_text');
@@ -46,7 +44,6 @@ let choicesArr = ['rock', 'paper', 'scissors'];
 
 function playerChoice(choice) {
   let player = '';
-
   if (choice === 'rock') {
     console.log('player choice rock');
     player = 'rock';
@@ -108,8 +105,6 @@ function botUI(botInput) {
 }
 
 function gameUI(playerIcon, botIcon) {
-  // adding class to player and bot transform
-
   if (playerIcon === botIcon) {
     playerIcon.classList.add('draw');
     botIcon.classList.add('draw');
@@ -136,7 +131,6 @@ function gameRound(player, bot) {
     showText.textContent = '';
     showResult.style.display = 'none';
   }, 3000);
-
   if (player === 'rock' || player === 'scissors' || player === 'paper') {
     if (player === bot) {
       showText.textContent = 'Its a draw';
