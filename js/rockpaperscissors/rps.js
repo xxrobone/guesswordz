@@ -15,8 +15,6 @@ let score = {
 startGame.addEventListener('click', gamePlay);
 
 function gamePlay() {
-  score.player = 0;
-  score.bot = 0;
   startGame.classList.add('deactivate');
   restart.style.display = 'block';
   choices.forEach((i) => {
@@ -183,13 +181,17 @@ function gameRound(player, bot) {
     console.log('No Choice is made must choose, rock or paper or scissors!');
   }
   function winner() {
-    if (score.player === 2 && score.bot < 2) {
+    if (score.player === 5 && score.bot < 5) {
       setTimeout(() => {
         showIcon.innerHTML = '';
         showText.textContent = '';
         showResult.style.display = 'none';
-        score.player = 0;
-        score.bot = 0;
+        score = {
+          player: 0,
+          bot: 0,
+        };
+        /*  playerScore.textContent = 0;
+        botScore.textContent = 0; */
       }, 5000);
       console.log('Player Wins');
       showResult.style.display = 'block';
@@ -200,13 +202,15 @@ function gameRound(player, bot) {
       choices.forEach((i) => {
         i.classList.remove('active');
       });
-    } else if (score.bot === 2 && score.player < 2) {
+    } else if (score.bot === 5 && score.player < 5) {
       setTimeout(() => {
         showIcon.innerHTML = '';
         showText.textContent = '';
         showResult.style.display = 'none';
-        score.player = 0;
-        score.bot = 0;
+        score = {
+          player: 0,
+          bot: 0,
+        };
       }, 5000);
       console.log('You loose! bot wins');
       showResult.style.display = 'block';
@@ -241,18 +245,19 @@ function gameReset() {
   choices.forEach((i) => {
     i.classList.remove('active');
   });
-  score.player = 0;
-  score.bot = 0;
-  playerScore.textContent = score.player;
-  botScore.textContent = score.bot;
+  /* score = {
+    player: 0,
+    bot: 0,
+  };
+  playerScore.textContent = 0;
+  botScore.textContent = 0;
   showResult.style.display = 'none';
   showText.textContent = '';
   showIcon.innerHTML = '';
   restart.style.display = 'none';
   restart.classList.remove('tryagain');
-  restart.textContent = 'Restart';
-  clearTimeout();
-  /* location.reload(); */
+  restart.textContent = 'Restart'; */
+  location.reload();
   startGame.classList.remove('deactivate');
 }
 
