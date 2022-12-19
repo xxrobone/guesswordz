@@ -7,7 +7,7 @@ const startGame = document.querySelector('.start');
 const restart = document.querySelector('.restart');
 let choices = document.querySelectorAll('.choices_wrapper > ul > li > i');
 
-const score = {
+let score = {
   player: 0,
   bot: 0,
 };
@@ -15,6 +15,9 @@ const score = {
 startGame.addEventListener('click', gamePlay);
 
 function gamePlay() {
+  score.player = 0;
+  score.bot = 0;
+  startGame.classList.add('deactivate');
   restart.style.display = 'block';
   choices.forEach((i) => {
     i.classList.add('active');
@@ -112,7 +115,7 @@ function gameUI(playerIcon, botIcon) {
     setTimeout(() => {
       playerIcon.classList.remove('draw');
       botIcon.classList.remove('draw');
-    }, 2500);
+    }, 2000);
   } else {
     playerIcon.classList.add('player_icon');
     botIcon.classList.add('bot_icon');
@@ -120,17 +123,18 @@ function gameUI(playerIcon, botIcon) {
     setTimeout(() => {
       playerIcon.classList.remove('player_icon');
       botIcon.classList.remove('bot_icon');
-    }, 2500);
+    }, 2000);
   }
 }
 
+/* const resultTimeout = setTimeout(() => {
+  showIcon.innerHTML = '';
+  showText.textContent = '';
+  showResult.style.display = 'none';
+}, 2500); */
+
 function gameRound(player, bot) {
   showResult.style.display = 'flex';
-  setTimeout(() => {
-    showIcon.innerHTML = '';
-    showText.textContent = '';
-    showResult.style.display = 'none';
-  }, 3000);
   if (player === 'rock' || player === 'scissors' || player === 'paper') {
     if (player === bot) {
       showText.textContent = 'Its a draw';
@@ -178,6 +182,51 @@ function gameRound(player, bot) {
   } else {
     console.log('No Choice is made must choose, rock or paper or scissors!');
   }
+  function winner() {
+    if (score.player === 2 && score.bot < 2) {
+      setTimeout(() => {
+        showIcon.innerHTML = '';
+        showText.textContent = '';
+        showResult.style.display = 'none';
+        score.player = 0;
+        score.bot = 0;
+      }, 5000);
+      console.log('Player Wins');
+      showResult.style.display = 'block';
+      showText.textContent = 'You win! Oh happy day, oh happy day!';
+      showText.style.fontSize = '3rem';
+      restart.classList.add('tryagain');
+      restart.textContent = 'Try again';
+      choices.forEach((i) => {
+        i.classList.remove('active');
+      });
+    } else if (score.bot === 2 && score.player < 2) {
+      setTimeout(() => {
+        showIcon.innerHTML = '';
+        showText.textContent = '';
+        showResult.style.display = 'none';
+        score.player = 0;
+        score.bot = 0;
+      }, 5000);
+      console.log('You loose! bot wins');
+      showResult.style.display = 'block';
+      showText.textContent = 'You Loose, Bot is on fire today... try again';
+      showText.style.fontSize = '3rem';
+      restart.classList.add('tryagain');
+      restart.textContent = 'Try again';
+      choices.forEach((i) => {
+        i.classList.remove('active');
+      });
+    } else {
+      setTimeout(() => {
+        showIcon.innerHTML = '';
+        showText.textContent = '';
+        showResult.style.display = 'none';
+      }, 2500);
+      return;
+    }
+  }
+  winner();
 }
 
 function clearResult(e) {
@@ -189,12 +238,22 @@ function clearResult(e) {
 window.addEventListener('click', clearResult);
 
 function gameReset() {
+  choices.forEach((i) => {
+    i.classList.remove('active');
+  });
   score.player = 0;
   score.bot = 0;
   playerScore.textContent = score.player;
   botScore.textContent = score.bot;
   showResult.style.display = 'none';
+  showText.textContent = '';
+  showIcon.innerHTML = '';
   restart.style.display = 'none';
+  restart.classList.remove('tryagain');
+  restart.textContent = 'Restart';
+  clearTimeout();
+  /* location.reload(); */
+  startGame.classList.remove('deactivate');
 }
 
 restart.addEventListener('click', gameReset);
