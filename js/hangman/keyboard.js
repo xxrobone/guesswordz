@@ -1,5 +1,5 @@
 'use strict';
-function theKeyboard() {
+function theKeyboard(e) {
   const active = 'active';
   const inactive = 'inactive';
 
@@ -39,12 +39,14 @@ function theKeyboard() {
     const button = document.createElement('button');
     button.classList.add('key_btn');
     button.textContent = l;
-      keyboard.append(button);
-      
-      button.addEventListener('click', function () {
-          let l = this.textContent
-          inputWord.append(l)
-      })
+    keyboard.append(button);
+
+    button.addEventListener('click', function () {
+      let l = this.textContent;
+      inputWord.append(l);
+      l = e.target.value;
+    });
+    console.log(value);
   });
 }
 
