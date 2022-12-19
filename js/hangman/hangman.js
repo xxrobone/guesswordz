@@ -70,7 +70,7 @@ function theKeyboard(e) {
 theKeyboard();
 
 let userInput;
-const btn = document.querySelector('.btn').addEventListener('click', playGame);
+/* const btn = document.querySelector('.btn').addEventListener('click', playGame); */
 
 // only using this short array, could be more words, could also use an api with words too fetch from
 const wordsArr = [

@@ -29,3 +29,16 @@ margin: 2rem auto;
     padding: 0 0.25rem;
     font-size: 1.5rem;
 }
+
+.btn_start {
+    cursor: pointer;
+}
+
+.info {
+    display: none;
+}
+
+.btn_start:hover + .info {
+   display: block;
+   
+}
