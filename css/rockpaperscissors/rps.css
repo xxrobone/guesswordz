@@ -113,7 +113,7 @@ h1 {
 }
 
 .restart.tryagain {
-    transform: translateY(-20vh) scale(2);
+    transform: translateY(-20vh) scale(1.5);
     transition: transform 0.4s ease-out;
     transition-delay: 3s;
 }
@@ -219,8 +219,14 @@ i.small {
     position: absolute;
     top: 1rem;
     text-align: center;
+    letter-spacing: 2px;
     animation-name: showText;
     animation-duration: 1.2s;
+    color: #fafafa;
+    filter: drop-shadow(1px 1px rgba(0, 0, 0, 0.918));
+    padding: 0.5rem 1rem;
+    background-color: #121212;
+    box-shadow: 2px 2px 2px black, -2px -2px 2px black;
 }
 
 .show_icon {

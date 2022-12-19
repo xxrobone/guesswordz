@@ -145,35 +145,51 @@ function gameRound(player, bot) {
         'background: #222; color: #ffd500'
       );
     } else if (player === 'rock' && bot === 'scissors') {
-      showText.textContent = 'You Win!';
+      showText.textContent = 'Round goes to player!';
       score.player++;
       playerScore.textContent = score.player;
       console.log(
-        '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
+        '%c Player choice: ' +
+          player +
+          '\nBot choice: ' +
+          bot +
+          '\nRound goes to player!',
         'background: #222; color: #90ee90'
       );
     } else if (player === 'scissors' && bot === 'paper') {
-      showText.textContent = 'You Win!';
+      showText.textContent = 'Round goes to player!';
       score.player++;
       playerScore.textContent = score.player;
       console.log(
-        '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
+        '%c Player choice: ' +
+          player +
+          '\nBot choice: ' +
+          bot +
+          '\nRound goes to player!',
         'background: #222; color: #90ee90'
       );
     } else if (player === 'paper' && bot === 'rock') {
-      showText.textContent = 'You Win!';
+      showText.textContent = 'Round goes to player!';
       score.player++;
       playerScore.textContent = score.player;
       console.log(
-        '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Win!',
+        '%c Player choice: ' +
+          player +
+          '\nBot choice: ' +
+          bot +
+          '\nRound goes to player!',
         'background: #222; color: #90ee90'
       );
     } else {
-      showText.textContent = 'You Loose!';
+      showText.textContent = 'Round goes to bot!';
       score.bot++;
       botScore.textContent = score.bot;
       console.log(
-        '%c Player choice: ' + player + '\nBot choice: ' + bot + '\nYou Loose!',
+        '%c Player choice: ' +
+          player +
+          '\nBot choice: ' +
+          bot +
+          '\nRound goes to bot!',
         'background: #222; color: #D2042D'
       );
     }
@@ -195,7 +211,8 @@ function gameRound(player, bot) {
       }, 5000);
       console.log('Player Wins');
       showResult.style.display = 'block';
-      showText.textContent = 'You win! Oh happy day, oh happy day!';
+      showText.textContent =
+        'Round goes to player! Oh happy day, oh happy day!';
       showText.style.fontSize = '3rem';
       restart.classList.add('tryagain');
       restart.textContent = 'Try again';
@@ -212,9 +229,10 @@ function gameRound(player, bot) {
           bot: 0,
         };
       }, 5000);
-      console.log('You loose! bot wins');
+      console.log('Round goes to bot! bot wins');
       showResult.style.display = 'block';
-      showText.textContent = 'You Loose, Bot is on fire today... try again';
+      showText.textContent =
+        'Round goes to bot, Bot is on fire today... try again';
       showText.style.fontSize = '3rem';
       restart.classList.add('tryagain');
       restart.textContent = 'Try again';

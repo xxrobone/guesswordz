@@ -1,4 +1,6 @@
-// keeping the old code blow, testing new code
+let title = document.querySelector('header > h1')
+
+title.forEach(l => l)
 
 
 
