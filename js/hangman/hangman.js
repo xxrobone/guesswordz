@@ -170,14 +170,8 @@ also show progress of the word if guess is right */
   let wordHtml = '';
 
   for (let i = 0; i < secretWord.length; i++) {
-    if (secretWord[i] == ' ') {
-      answerArr[i] = secretWord[i];
-
-      wordHtml += `<span class="hidden"><span>`;
-    } else {
-      wordHtml += `<span class="show"><span>`;
-    }
-
+    answerArr[i] = '_';
+    wordHtml += `<span class="hidden">${answerArr[i]}<span>`;
     word.innerHTML = wordHtml;
   }
 

@@ -6,7 +6,7 @@
 
 main {
     width: 100%;
-margin: 2rem auto;
+    margin: 2rem auto;
 }
 
 .welcome {
@@ -17,26 +17,39 @@ margin: 2rem auto;
 }
 
 .secret_word {
+    margin: 2rem 0;
     font-size: 1.2rem;
     color: orange;
     text-align: center;
     text-transform: uppercase;
 }
 
-.secret_word > span > .hidden {
-    border: none;
+.secret_word > span.hidden {
+    letter-spacing: 4px;
 }
 
-.secret_word > span > .show{
-    border: 2px solid white;
+.secret_word > span.show{
+    border: none;
 }
 .secret_word > span {
     padding: 0 0.25rem;
 }
 
+.input_box {
+    position: relative;
+    margin: 0 auto;
+    height: 40px;
+    width: 80%;
+    padding: 0.25rem 0.5rem;
+    background-color: #282828;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .user_guess {
-    width: 100%;
-    height: 100px;
+    position: relative;
     font-size: 1.2rem;
     color: yellow;
     text-align: center;
