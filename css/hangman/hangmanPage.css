@@ -21,6 +21,10 @@ main {
     letter-spacing: 2px;
 }
 
+#hangman > nav > ul > li > a {
+    color:  orangered;;
+}
+
 .game_info {
     margin: 0 auto;
     padding: 2rem 1rem;

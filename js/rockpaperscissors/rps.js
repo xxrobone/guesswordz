@@ -208,11 +208,10 @@ function gameRound(player, bot) {
         };
         /*  playerScore.textContent = 0;
         botScore.textContent = 0; */
-      }, 5000);
+      }, 6000);
       console.log('Player Wins');
       showResult.style.display = 'block';
-      showText.textContent =
-        'Round goes to player! Oh happy day, oh happy day!';
+      showText.textContent = 'Congrats YOU WIN! \nOh happy day, oh happy day!';
       showText.style.fontSize = '3rem';
       restart.classList.add('tryagain');
       restart.textContent = 'Try again';
@@ -228,11 +227,11 @@ function gameRound(player, bot) {
           player: 0,
           bot: 0,
         };
-      }, 5000);
+      }, 6000);
       console.log('Round goes to bot! bot wins');
       showResult.style.display = 'block';
       showText.textContent =
-        'Round goes to bot, Bot is on fire today... try again';
+        'Sorry buddy! Bot is on fire today... try again ;D';
       showText.style.fontSize = '3rem';
       restart.classList.add('tryagain');
       restart.textContent = 'Try again';
