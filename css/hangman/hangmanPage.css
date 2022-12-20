@@ -16,6 +16,26 @@ main {
     place-content: center;
 }
 
+#hangman > header > h1 {
+    font-family: Coolvetica;
+    letter-spacing: 2px;
+}
+
+.game_info {
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    max-width: 400px;
+    background-color: #181818;
+}
+
+.game_info > p {
+    font-family: Coolvetica;
+    font-size: 1rem;
+    font-weight: 100;
+    letter-spacing: 1px;
+    line-height: 1.5rem;
+}
+
 .secret_word {
     margin: 2rem 0;
     font-size: 1.2rem;
@@ -64,4 +84,6 @@ main {
 .btn_start {
     
 }
+
+
 

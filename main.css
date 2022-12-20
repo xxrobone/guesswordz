@@ -48,13 +48,13 @@ p {
 }
 
 h2 {
-    font-family: Bebas;
+    /* font-family: Bebas; */
     font-size: clamp(1.5rem, 2.5vw, 4rem); 
     color: orangered;
 }
 
 h1 {
-  font-family: Kenoky;
+  /* font-family: Kenoky; */
     font-size: clamp(3rem, 10vw, 4rem); 
     line-height: 1.1;
     color: orangered;
