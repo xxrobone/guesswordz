@@ -17,10 +17,9 @@ greet('Rob');
  */
 /* theKeyboard(); */
 
-function theKeyboard(e) {
-  const active = 'active';
-  const inactive = 'inactive';
+let userInput;
 
+function theKeyboard() {
   const keyboard = document.querySelector('.keyboard');
   const inputWord = document.querySelector('.input_word');
 
@@ -53,23 +52,22 @@ function theKeyboard(e) {
     'z',
   ];
 
-  keyboardKeys.map((l) => {
+  keyboardKeys.map((letter) => {
     const button = document.createElement('button');
     button.classList.add('key_btn');
-    button.textContent = l;
+    button.textContent = letter;
     keyboard.append(button);
 
-    button.addEventListener('click', function () {
-      let l = this.textContent;
+    button.addEventListener('click', (e) => {
+      let l = e.target.textContent;
       inputWord.append(l);
-      /* userInput = l; */
+      console.log(l);
     });
   });
 }
 
 theKeyboard();
 
-let userInput;
 /* const btn = document.querySelector('.btn').addEventListener('click', playGame); */
 
 // only using this short array, could be more words, could also use an api with words too fetch from

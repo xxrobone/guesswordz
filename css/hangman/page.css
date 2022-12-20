@@ -31,14 +31,6 @@ margin: 2rem auto;
 }
 
 .btn_start {
-    cursor: pointer;
+    
 }
 
-.info {
-    display: none;
-}
-
-.btn_start:hover + .info {
-   display: block;
-   
-}
