@@ -1,6 +1,3 @@
-//imports
-/* import { theKeyboard, sayHi, sayBye } from './keyboard.js'; */
-
 const welcome = document.querySelector('.welcome');
 console.log(welcome);
 /* console.log(sayHi('Rob'));
@@ -15,60 +12,62 @@ console.log(sayBye('Rob')); */
 
 greet('Rob');
  */
-/* theKeyboard(); */
 
 let userInput;
 
-function theKeyboard() {
-  const keyboard = document.querySelector('.keyboard');
-  const inputWord = document.querySelector('.input_word');
+const keyboard = document.querySelector('.keyboard');
+const word = document.querySelector('.secret_word');
+const userGuess = document.querySelector('.user_guess');
 
-  const keyboardKeys = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
-  ];
+const keyboardKeys = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+];
 
-  keyboardKeys.map((letter) => {
-    const button = document.createElement('button');
-    button.classList.add('key_btn');
-    button.textContent = letter;
-    keyboard.append(button);
+keyboardKeys.map((letter) => {
+  const button = document.createElement('button');
+  button.classList.add('key_btn');
+  button.setAttribute('disabled', '');
+  button.textContent = letter;
+  keyboard.append(button);
 
-    button.addEventListener('click', (e) => {
-      let l = e.target.textContent;
-      inputWord.append(l);
-      console.log(l);
-    });
+  button.addEventListener('click', (e) => {
+    userGuess.textContent = '';
+    let l = e.target.textContent;
+    userGuess.textContent = l;
+
+    userInput = l;
+    console.log('user input choice: ' + userInput);
   });
-}
+});
 
-theKeyboard();
-
-/* const btn = document.querySelector('.btn').addEventListener('click', playGame); */
+const startButton = document
+  .querySelector('.btn_start')
+  .addEventListener('click', playGame);
 
 // only using this short array, could be more words, could also use an api with words too fetch from
 const wordsArr = [
@@ -144,12 +143,17 @@ function randomWord(inputArr) {
 
 // creating the game loop
 function playGame() {
+  console.log('Game starts');
+  var buttons = document.querySelectorAll('.key_btn');
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].removeAttribute('disabled');
+  }
   // get a random word from the words array, one const ;)
 
   const secretWord = randomWord(wordsArr);
 
   // Declaring variable for player Guess
-
+  let userInput;
   // creating an array to hold the right guessed letters
   let answerArr = [];
 
@@ -163,8 +167,18 @@ function playGame() {
 so the player will see how many letters there is and
 also show progress of the word if guess is right */
 
+  let wordHtml = '';
+
   for (let i = 0; i < secretWord.length; i++) {
-    answerArr[i] = '_';
+    if (secretWord[i] == ' ') {
+      answerArr[i] = secretWord[i];
+
+      wordHtml += `<span class="hidden"><span>`;
+    } else {
+      wordHtml += `<span class="show"><span>`;
+    }
+
+    word.innerHTML = wordHtml;
   }
 
   //creating guesses variable with 6 chances
@@ -210,8 +224,6 @@ also show progress of the word if guess is right */
         '\nLetters remaining ' +
         remainingLetters
     ); */
-
-  userInput = document.querySelector('.input_word').textContent;
 
   console.log('this is the userInputLetter: ' + userInput);
   // check if sercretword has userInput letter in it and answer array does not

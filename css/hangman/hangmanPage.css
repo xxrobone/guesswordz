@@ -16,7 +16,25 @@ margin: 2rem auto;
     place-content: center;
 }
 
-.input_word {
+.secret_word {
+    font-size: 1.2rem;
+    color: orange;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.secret_word > span > .hidden {
+    border: none;
+}
+
+.secret_word > span > .show{
+    border: 2px solid white;
+}
+.secret_word > span {
+    padding: 0 0.25rem;
+}
+
+.user_guess {
     width: 100%;
     height: 100px;
     font-size: 1.2rem;
