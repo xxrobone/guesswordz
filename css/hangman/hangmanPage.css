@@ -46,6 +46,7 @@ main {
     color: orange;
     text-align: center;
     text-transform: uppercase;
+    letter-spacing: 5px;
 }
 
 .secret_word > span.hidden {

@@ -18,6 +18,7 @@ let userInput;
 const keyboard = document.querySelector('.keyboard');
 const word = document.querySelector('.secret_word');
 const userGuess = document.querySelector('.user_guess');
+const alertMsg = document.querySelector('.alert');
 
 const keyboardKeys = [
   'a',
@@ -54,20 +55,11 @@ keyboardKeys.map((letter) => {
   button.setAttribute('disabled', '');
   button.textContent = letter;
   keyboard.append(button);
-
-  button.addEventListener('click', (e) => {
-    userGuess.textContent = '';
-    let l = e.target.textContent;
-    userGuess.textContent = l;
-
-    userInput = l;
-    console.log('user input choice: ' + userInput);
-  });
 });
 
 const startButton = document
   .querySelector('.btn_start')
-  .addEventListener('click', playGame);
+  .addEventListener('click', gameLoop);
 
 // only using this short array, could be more words, could also use an api with words too fetch from
 const wordsArr = [
@@ -142,18 +134,17 @@ function randomWord(inputArr) {
 }
 
 // creating the game loop
-function playGame() {
+function gameLoop() {
   console.log('Game starts');
-  var buttons = document.querySelectorAll('.key_btn');
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].removeAttribute('disabled');
+  let btns = document.querySelectorAll('.key_btn');
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].removeAttribute('disabled');
   }
   // get a random word from the words array, one const ;)
 
   const secretWord = randomWord(wordsArr);
 
-  // Declaring variable for player Guess
-  let userInput;
+  console.log('this is the secret word: ' + secretWord);
   // creating an array to hold the right guessed letters
   let answerArr = [];
 
@@ -171,7 +162,7 @@ also show progress of the word if guess is right */
 
   for (let i = 0; i < secretWord.length; i++) {
     answerArr[i] = '_';
-    wordHtml += `<span class="hidden">${answerArr[i]}<span>`;
+    wordHtml = `${answerArr}`;
     word.innerHTML = wordHtml;
   }
 
@@ -205,8 +196,8 @@ also show progress of the word if guess is right */
   // removing while function while i figure this one out
   /* while (remainingLetters > 0 && guesses > 0) { */
   // regex to check if input is number or letter
-  var regexCheckNumber = /^[0-9]+$/;
-  var regexCheckLetter = /^[a-öA-Ö]+$/;
+  /* var regexCheckNumber = /^[0-9]+$/;
+  var regexCheckLetter = /^[a-öA-Ö]+$/; */
   // initializing the userInput variable by taking in the player input or cancel
   /* userInput = prompt(
       'Guess a letter!' +
@@ -218,41 +209,58 @@ also show progress of the word if guess is right */
         '\nLetters remaining ' +
         remainingLetters
     ); */
+  let userInput;
+  btns.forEach((i) => {
+    i.addEventListener('click', async (e) => {
+      console.log(e.target.textContent);
+      userGuess.textContent = '';
+      let letter = await e.target.textContent;
+      userGuess.textContent = letter;
+      checkForMatch(letter);
+    });
+  });
+
+  console.log('user input choice: ' + userInput);
 
   console.log('this is the userInputLetter: ' + userInput);
-  // check if sercretword has userInput letter in it and answer array does not
-  if (secretWord.includes(userInput) && !answerArr.includes(userInput)) {
-    // looping over the secretWord and checking if the userInputed letter is in the word and what position
-    for (let j = 0; j < secretWord.length; j++) {
-      if (secretWord[j] === userInput) {
-        answerArr[j] = userInput;
-        // decrease remaining letters in the word
-        remainingLetters--;
+
+  function checkForMatch(userInput) {
+    // check if sercretword has userInput letter in it and answer array does not
+    if (secretWord.includes(userInput) && !answerArr.includes(userInput)) {
+      // looping over the secretWord and checking if the userInputed letter is in the word and what position
+      for (let j = 0; j < secretWord.length; j++) {
+        if (secretWord[j] === userInput) {
+          answerArr[j] = userInput;
+          wordHtml = `${answerArr}`;
+          word.innerHTML = wordHtml;
+          // decrease remaining letters in the word
+          remainingLetters--;
+        }
       }
+    } else if (userInput === null || userInput === '') {
+      //check player guess is
+      quitGame = true;
+      /* alert('no input given, game will end!'); */
+      /* break; */
+    } /*  else if (
+       userInput.length === -1 || 
+      !userInput.match(regexCheckLetter) ||
+      userInput.match(regexCheckNumber)
+    ) {
+      console.log('Please use letters only & one at a time');
+    } */
+    // Alert if letter is already used checking the answer array and used letters array
+    else if (answerArr.includes(userInput) || usedLetters.includes(userInput)) {
+      /* alert('You already used this letter'); */
+      console.log('You already used this letter');
+    } else {
+      // update the game progress guess is match to no match and -1 on guesses
+      // also push the letter that is not included in the word to used letters array
+      guesses--;
+      usedLetters.push(userInput);
     }
-  } else if (userInput === null || userInput === '') {
-    //check player guess is
-    quitGame = true;
-    /* alert('no input given, game will end!'); */
-    /* break; */
-  } else if (
-    userInput.length !== 1 ||
-    !userInput.match(regexCheckLetter) ||
-    userInput.match(regexCheckNumber)
-  ) {
-    /* alert('Please use letters only & one at a time'); */
-    console.log('Please use letters only & one at a time');
   }
-  // Alert if letter is already used checking the answer array and used letters array
-  else if (answerArr.includes(userInput) || usedLetters.includes(userInput)) {
-    /* alert('You already used this letter'); */
-    console.log('You already used this letter');
-  } else {
-    // update the game progress guess is match to no match and -1 on guesses
-    // also push the letter that is not included in the word to used letters array
-    guesses--;
-    usedLetters.push(userInput);
-  }
+
   // game loop ending
   console.log(guesses);
   /*  }  this is the end of the while loop */
