@@ -224,7 +224,7 @@ function gameRound(player, bot) {
   }
 
   function winner() {
-    if (score.player === 2 && score.bot < 2) {
+    if (score.player === 3 && score.bot < 3) {
       playerWins++;
       wins.textContent = playerWins;
       console.log('player wins = ' + playerWins);
@@ -243,7 +243,7 @@ function gameRound(player, bot) {
       choices.forEach((i) => {
         i.classList.remove('active');
       });
-    } else if (score.bot === 2 && score.player < 2) {
+    } else if (score.bot === 3 && score.player < 3) {
       setTimeout(() => {
         showIcon.innerHTML = '';
         showText.textContent = '';
