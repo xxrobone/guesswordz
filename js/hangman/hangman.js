@@ -17,6 +17,7 @@ let userInput;
 
 let gameInfo = document.querySelector('.info');
 const keyboard = document.querySelector('.keyboard');
+const guessesLeft = document.querySelector('.guesses');
 const word = document.querySelector('.secret_word');
 const userGuess = document.querySelector('.user_guess');
 const msg = document.querySelector('.msg');
@@ -183,6 +184,8 @@ also show progress of the word if guess is right */
   //creating guesses variable with 6 chances
   let guesses = 6;
 
+  guessesLeft.textContent = `You have ${guesses} guesses left`;
+
   // Alert to show the info of the game
   /* alert(
     'Welcome! \nThis is a hangman (word guessing) game \nTo play continue with pressing OK' +
@@ -267,6 +270,7 @@ also show progress of the word if guess is right */
       // update the game progress guess is match to no match and -1 on guesses
       // also push the letter that is not included in the word to used letters array
       guesses--;
+      guessesLeft.textContent = `You have ${guesses} guesses left`;
       usedLetters.push(userInput);
       wrongLetters.textContent = 'wrong guesses: ' + usedLetters.join('');
     }

@@ -17,7 +17,7 @@ main {
     letter-spacing: 2px;
 }
 
-#hangman h2 {
+ h2 {
     font-size: clamp(1.5rem, 2.5vw, 4rem); 
     text-align: center;
 }
@@ -42,10 +42,9 @@ main {
 
 .info > .text {
     color: white;
-    font-family: Coolvetica;
     font-size: 1rem;
     font-weight: 100;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     line-height: 1.5rem;
 }
 
@@ -96,7 +95,9 @@ main {
     font-size: 1.5rem;
 }
 
+.guesses,
 .msg {
+    color: rgb(223, 149, 89);
     position: relative;
     margin: 0.5rem 0;
     text-align: center;
