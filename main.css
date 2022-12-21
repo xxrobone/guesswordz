@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;400;600;900&display=swap");
 @import url("./css/typography.css");
 @import url("./css/header.css");
+@import url("./css/footer.css");
 @import url("./css/nav.css");
 
 
@@ -49,9 +50,6 @@ body {
 
 #mainpage > header {
   height: 100px;
-  border-top: 1px solid #888;
-  border-bottom: 1px solid #888;
-  background: linear-gradient(120deg, rgb(20, 20, 20), #0f0f0f, #020101, #1b1b1b, #000000);
 }
 
 #mainpage > header > h1 {

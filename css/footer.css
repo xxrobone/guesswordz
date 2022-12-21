@@ -1,15 +1,14 @@
-header {
-    width: 100%;
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
     height: 60px;
-    display: grid;
-    place-content: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-top: 1px solid #888;
     border-bottom: 1px solid #888;
     background: linear-gradient(120deg, rgb(20, 20, 20), #0f0f0f, #020101, #1b1b1b, #000000);
-}
-
-@media screen and (min-width: 768px) {
-    header {
-        height: 100px;
-    }
+    color: white;
 }
