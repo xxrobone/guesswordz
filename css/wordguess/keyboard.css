@@ -43,7 +43,6 @@
 
   .key_msg > span {
     color: rgb(202, 33, 33);
-    border-bottom: 1px solid red;
     letter-spacing: 2px;
     font-weight: 100;
   }
