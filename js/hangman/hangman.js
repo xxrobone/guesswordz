@@ -236,6 +236,11 @@ also show progress of the word if guess is right */
           answerArr[j] = userInput;
           wordHtml = `${answerArr.join('')}`;
           word.innerHTML = wordHtml;
+
+          msg.textContent = 'You got that one right ;D';
+          setTimeout(function () {
+            msg.textContent = '';
+          }, 2000);
         }
       }
     } else if (userInput === null || userInput === '') {
@@ -263,6 +268,7 @@ also show progress of the word if guess is right */
       // also push the letter that is not included in the word to used letters array
       guesses--;
       usedLetters.push(userInput);
+      wrongLetters.textContent = 'wrong guesses: ' + usedLetters.join('');
     }
   }
 

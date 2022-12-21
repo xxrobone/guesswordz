@@ -103,6 +103,12 @@ main {
     height:20px;
 }
 
+.wrong_letters{
+    text-align: center;
+    letter-spacing: 5px;
+    color: rgb(224, 48, 17);
+}
+
 .btn_start {
     
 }
