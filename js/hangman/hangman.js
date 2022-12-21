@@ -1,20 +1,3 @@
-const welcome = document.querySelector('.welcome');
-console.log(welcome);
-/* console.log(sayHi('Rob'));
-console.log(sayBye('Rob')); */
-// button to play game
-
-/* function greet(name) {
-  let el = document.createElement('h2');
-  el.textContent = sayHi(name);
-  welcome.append(el);
-}
-
-greet('Rob');
- */
-
-let userInput;
-
 let gameInfo = document.querySelector('.info');
 const keyboard = document.querySelector('.keyboard');
 const guessesLeft = document.querySelector('.guesses');
@@ -25,15 +8,16 @@ let wrongLetters = document.querySelector('.wrong_letters');
 
 function createInfo(input) {
   gameInfo.innerHTML = '';
-  let text = document.createElement('p');
-  text.classList.add('text');
-  text.textContent = input;
-  gameInfo.append(text);
+  gameInfo.innerHTML = input;
 }
 
-createInfo(
-  'Welcome! \nThis is a hangman (word guessing) game \nTo play press START'
-);
+let welcomeText = `<p>
+Welcome! </br>
+This is a hangman(word guessing) game </Br>
+To play press START
+</p>
+`;
+createInfo(welcomeText);
 
 const keyboardKeys = [
   'a',
@@ -150,7 +134,9 @@ function randomWord(inputArr) {
 
 // creating the game loop
 function gameLoop() {
+  let win = 'false';
   console.log('Game starts');
+  // looping thru the array of buttons and removing the disabled attribute
   let btns = document.querySelectorAll('.key_btn');
   for (let i = 0; i < btns.length; i++) {
     btns[i].removeAttribute('disabled');
@@ -166,14 +152,12 @@ function gameLoop() {
   // used letters array, that is not included in the word
   let usedLetters = [];
 
-  // quit game initialization set to false
-  let quitGame = false;
+  // html variable to show the progress of the secret word
+  let wordHtml = '';
 
   /* looping thru the secret word and adding it to the answer array 
 so the player will see how many letters there is and
 also show progress of the word if guess is right */
-
-  let wordHtml = '';
 
   for (let i = 0; i < secretWord.length; i++) {
     answerArr[i] = '_';
@@ -186,36 +170,11 @@ also show progress of the word if guess is right */
 
   guessesLeft.textContent = `You have ${guesses} guesses left`;
 
-  // Alert to show the info of the game
-  /* alert(
-    'Welcome! \nThis is a hangman (word guessing) game \nTo play continue with pressing OK' +
-      '\nThe word is ' +
-      answerArr +
-      ' : ' +
-      secretWord.length +
-      ' characters long'
-  ); */
   createInfo(
     `The word is \n ${answerArr} : ${secretWord.length} characters long`
   );
 
-  // removing while function while i figure this one out
-  /* while (remainingLetters > 0 && guesses > 0) { */
-  // regex to check if input is number or letter
-  /* var regexCheckNumber = /^[0-9]+$/;
-  var regexCheckLetter = /^[a-öA-Ö]+$/; */
-  // initializing the userInput variable by taking in the player input or cancel
-  /* userInput = prompt(
-      'Guess a letter!' +
-        ' or click cancel to quit.' +
-        '\nYour guessed letters ' +
-        answerArr.join(' ') +
-        '\nGuesses left: ' +
-        guesses +
-        '\nLetters remaining ' +
-        remainingLetters
-    ); */
-  let userInput;
+  /* Player input on button click getting the textContent 'value'  */
   btns.forEach((i) => {
     i.addEventListener('click', async (e) => {
       console.log(e.target.textContent);
@@ -223,12 +182,9 @@ also show progress of the word if guess is right */
       let letter = await e.target.textContent;
       userGuess.textContent = letter;
       checkForMatch(letter);
+      winOrLoss(guesses, win);
     });
   });
-
-  console.log('user input choice: ' + userInput);
-
-  console.log('this is the userInputLetter: ' + userInput);
 
   function checkForMatch(userInput) {
     // check if sercretword has userInput letter in it and answer array does not
@@ -246,26 +202,18 @@ also show progress of the word if guess is right */
           }, 2000);
         }
       }
-    } else if (userInput === null || userInput === '') {
-      //check player guess is
-      quitGame = true;
-      /* alert('no input given, game will end!'); */
-      /* break; */
-    } /*  else if (
-       userInput.length === -1 || 
-      !userInput.match(regexCheckLetter) ||
-      userInput.match(regexCheckNumber)
-    ) {
-      console.log('Please use letters only & one at a time');
-    } */
-    // Alert if letter is already used checking the answer array and used letters array
+    }
+    // Show player if letter is already used checking the answer array and used letters array
     else if (answerArr.includes(userInput) || usedLetters.includes(userInput)) {
-      /* alert('You already used this letter'); */
       console.log('You already used this letter');
       msg.textContent = 'You already used this letter';
       setTimeout(function () {
         msg.textContent = '';
       }, 2000);
+    } else if (answerArr.join('') === secretWord) {
+      win = 'true';
+      console.log(answerArr.join('') + ' is the right word YOU WIN');
+      console.log('is win? : ' + win);
     } else {
       // update the game progress guess is match to no match and -1 on guesses
       // also push the letter that is not included in the word to used letters array
@@ -277,44 +225,48 @@ also show progress of the word if guess is right */
   }
 
   // game loop ending
-  console.log(guesses);
-  /*  }  this is the end of the while loop */
+  console.log(guesses, win);
+  /* } */ //loop ending the while loop
   // game endings
-  if (guesses === 0) {
-    /* alert(
-      'Game over \nSorry You have no more guesses: ' +
-        guesses +
-        '\nThe word was: ' +
-        secretWord.toUpperCase() +
-        '\nYour guess progress ' +
-        answerArr.join(' ').toUpperCase()
-    ); */
-    console.log(
-      'Game over \nSorry You have no more guesses: ' +
-        guesses +
-        '\nThe word was: ' +
-        secretWord.toUpperCase() +
-        '\nYour guess progress ' +
-        answerArr.join(' ').toUpperCase()
-    );
-  } else if (quitGame === true) {
-    console.log("Sad You diden't want to continue, \nHave a great day! :D");
-    /*  alert("Sad You diden't want to continue, \nHave a great day! :D"); */
-  } else {
-    /* alert(
-      'YOU WIN!' +
-        '\nGood job buddy! The answer was ' +
-        secretWord.toUpperCase() +
-        '\nYour guess was: ' +
-        answerArr.join('').toUpperCase()
-    ); */
-    console.log(
-      'YOU WIN!' +
-        '\nGood job buddy! The answer was ' +
-        secretWord.toUpperCase() +
-        '\nYour guess was: ' +
-        answerArr.join('').toUpperCase()
-    );
+  function winOrLoss(guesses, win) {
+    if (guesses === 0) {
+      console.log(
+        'Game over \nSorry You have no more guesses: ' +
+          guesses +
+          '\nThe word was: ' +
+          secretWord.toUpperCase() +
+          '\nYour guess progress ' +
+          answerArr.join(' ').toUpperCase()
+      );
+      let gameOverText = `
+      <p>
+        Game over </br>
+        Sorry You have no more guesses:  ${guesses} </br>
+        The word was: ${secretWord.toUpperCase()} </br>
+        Your guess progress ${answerArr.join(' ').toUpperCase()}
+      </p>
+      `;
+      createInfo(gameOverText);
+    } else if (guesses > 0 && win === 'true') {
+      let winText = `
+        <p>
+        YOU WIN! </br>
+        Good job buddy! The answer was:  ${secretWord.toUpperCase()} </br>
+        Your guess progress ${answerArr.join(' ').toUpperCase()}
+        </p>
+        `;
+      createInfo(winText);
+      console.log(
+        'YOU WIN!' +
+          '\nGood job buddy! The answer was ' +
+          secretWord.toUpperCase() +
+          '\nYour guess was: ' +
+          answerArr.join('').toUpperCase()
+      );
+    } else {
+      return;
+    }
   }
+
   //game function ending
 }

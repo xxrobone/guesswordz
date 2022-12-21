@@ -32,6 +32,7 @@ main {
     max-width: 400px;
     min-width: 300px;
     min-height: 100%;
+    color: white;
     background-color: #181818;
     display: block;
 }
@@ -40,8 +41,7 @@ main {
     display: block;
 }
 
-.info > .text {
-    color: white;
+.info > p {
     font-size: 1rem;
     font-weight: 100;
     letter-spacing: 2px;
