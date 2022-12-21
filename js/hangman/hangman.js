@@ -257,7 +257,6 @@ also show progress of the word if guess is right */
       msg.textContent = 'You already used this letter';
       setTimeout(function () {
         msg.textContent = '';
-        // Every 3 sec
       }, 2000);
     } else {
       // update the game progress guess is match to no match and -1 on guesses
