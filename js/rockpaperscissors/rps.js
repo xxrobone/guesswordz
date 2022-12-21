@@ -5,18 +5,44 @@ let playerScore = document.querySelector('#player');
 let botScore = document.querySelector('#bot');
 const startGame = document.querySelector('.start');
 const restart = document.querySelector('.restart');
+const quit = document.querySelector('.quit');
 let choices = document.querySelectorAll('.choices_wrapper > ul > li > i');
 
+// one way of going a score
 let score = {
   player: 0,
   bot: 0,
 };
 
-startGame.addEventListener('click', gamePlay);
+let wins = document.querySelector('.wins');
+let losses = document.querySelector('.losses');
+
+// and a easy beginner way
+let playerWins = 0;
+let playerLosses = 0;
+/* 
+playerWins++
+wins.textContent = playerWins */
+console.log('player score is ' + score.player + ' bot score is ' + score.bot);
+
+startGame.addEventListener('click', () => {
+  console.log(score.player + ' ' + score.bot);
+  showResult.style.display = 'none';
+  showText.textContent = '';
+  showIcon.innerHTML = '';
+  restart.style.display = 'none';
+  gamePlay();
+});
 
 function gamePlay() {
+  score.player = 0;
+  score.bot = 0;
+  playerScore.textContent = 0;
+  botScore.textContent = 0;
+  startGame.textContent = 'playing...';
   startGame.classList.add('deactivate');
   restart.style.display = 'block';
+  quit.style.display = 'block';
   choices.forEach((i) => {
     i.classList.add('active');
     i.addEventListener('click', (e) => {
@@ -196,38 +222,39 @@ function gameRound(player, bot) {
   } else {
     console.log('No Choice is made must choose, rock or paper or scissors!');
   }
+
   function winner() {
-    if (score.player === 5 && score.bot < 5) {
+    if (score.player === 2 && score.bot < 2) {
+      playerWins++;
+      wins.textContent = playerWins;
+      console.log('player wins = ' + playerWins);
       setTimeout(() => {
         showIcon.innerHTML = '';
         showText.textContent = '';
         showResult.style.display = 'none';
-        score = {
-          player: 0,
-          bot: 0,
-        };
-        /*  playerScore.textContent = 0;
-        botScore.textContent = 0; */
+        playerScore.textContent = score.player;
+        botScore.textContent = score.player;
       }, 6000);
-      console.log('Player Wins');
       showResult.style.display = 'block';
       showText.textContent = 'Congrats YOU WIN! \nOh happy day, oh happy day!';
       showText.style.fontSize = '3rem';
       restart.classList.add('tryagain');
-      restart.textContent = 'Try again';
+      restart.textContent = 'Try again?';
       choices.forEach((i) => {
         i.classList.remove('active');
       });
-    } else if (score.bot === 5 && score.player < 5) {
+    } else if (score.bot === 2 && score.player < 2) {
       setTimeout(() => {
         showIcon.innerHTML = '';
         showText.textContent = '';
         showResult.style.display = 'none';
-        score = {
-          player: 0,
-          bot: 0,
-        };
+        playerScore.textContent = score.player;
+        botScore.textContent = score.player;
       }, 6000);
+      playerLosses++;
+      losses.textContent = playerLosses;
+      console.log('player losses = ' + playerLosses);
+
       console.log('Round goes to bot! bot wins');
       showResult.style.display = 'block';
       showText.textContent =
@@ -250,32 +277,22 @@ function gameRound(player, bot) {
   winner();
 }
 
-function clearResult(e) {
-  if (e.target == showResult) {
-    showResult.style.display = 'none';
-  }
-}
-
-window.addEventListener('click', clearResult);
-
-function gameReset() {
-  choices.forEach((i) => {
-    i.classList.remove('active');
-  });
-  /* score = {
-    player: 0,
-    bot: 0,
-  };
-  playerScore.textContent = 0;
-  botScore.textContent = 0;
-  showResult.style.display = 'none';
-  showText.textContent = '';
-  showIcon.innerHTML = '';
-  restart.style.display = 'none';
-  restart.classList.remove('tryagain');
-  restart.textContent = 'Restart'; */
-  location.reload();
+function clearResult() {
+  startGame.textContent = 'play game';
   startGame.classList.remove('deactivate');
+  location.reload();
 }
 
-restart.addEventListener('click', gameReset);
+restart.addEventListener('click', () => {
+  restart.classList.remove('tryagain');
+  restart.textContent = 'restart';
+  startGame.textContent = 'playing...';
+  startGame.classList.add('deactivate');
+  score.player = 0;
+  score.bot = 0;
+  playerScore.textContent = score.player;
+  botScore.textContent = score.player;
+  gamePlay();
+});
+
+quit.addEventListener('click', clearResult);

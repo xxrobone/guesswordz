@@ -43,7 +43,6 @@ body {
   flex-direction: column;
   align-content: center;
   height: 700px;
-  font-family: Kenoky;
   overflow-x: hidden;
 }
 
@@ -52,15 +51,15 @@ body {
 }
 
 #mainpage > header > h1 {
-       background: linear-gradient(120deg, rgb(49, 49, 49), #b4b4b4, #9b9b9b, #ffffff, #000000);
-        background-size: 100%;
-        -webkit-background-clip: text;
-        -moz-background-clip: text;
-        -webkit-text-fill-color: transparent; 
-        -moz-text-fill-color: transparent;
-        font-weight: 800;
-        text-transform: uppercase;
-        transition: transform 1s ease;
+      background: linear-gradient(120deg, rgb(49, 49, 49), #b4b4b4, #9b9b9b, #ffffff, #000000);
+      background-size: 100%;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      -webkit-text-fill-color: transparent; 
+      -moz-text-fill-color: transparent;
+      font-weight: 800;
+      text-transform: uppercase;
+      transition: transform 1s ease;
 }
 
 
