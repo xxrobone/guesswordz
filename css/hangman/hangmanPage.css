@@ -16,23 +16,40 @@ main {
     place-content: center;
 }
 
-#hangman > header > h1 {
-    font-family: Coolvetica;
+#hangman h1 {
+    font-size: calc(2vmin + 2.5vmax);
+    font-family: Coolvetica;    
+    text-align: center;
+    text-transform: capitalize;
     letter-spacing: 2px;
+}
+
+#hangman h2 {
+    font-size: clamp(1.5rem, 2.5vw, 4rem); 
+    text-align: center;
+    filter: drop-shadow(2px 2px rgba(255, 255, 255, 0.247));
 }
 
 #hangman > nav > ul > li > a {
     color:  orangered;;
 }
 
-.game_info {
+.info {
     margin: 0 auto;
     padding: 2rem 1rem;
     max-width: 400px;
+    min-width: 300px;
+    min-height: 200px;
     background-color: #181818;
+    display: block;
 }
 
-.game_info > p {
+.block {
+    display: block;
+}
+
+.info > .text {
+    color: white;
     font-family: Coolvetica;
     font-size: 1rem;
     font-weight: 100;
@@ -64,7 +81,8 @@ main {
     position: relative;
     margin: 0 auto;
     height: 40px;
-    width: 80%;
+    width: 100%;
+    max-width: 400px;
     padding: 0.25rem 0.5rem;
     background-color: #282828;
     border-radius: 5px;

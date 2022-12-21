@@ -15,10 +15,23 @@ greet('Rob');
 
 let userInput;
 
+let gameInfo = document.querySelector('.info');
 const keyboard = document.querySelector('.keyboard');
 const word = document.querySelector('.secret_word');
 const userGuess = document.querySelector('.user_guess');
 const alertMsg = document.querySelector('.alert');
+let wrongLetters = document.querySelector('.alert');
+
+function createInfo(input) {
+  let text = document.createElement('p');
+  text.classList.add('text');
+  text.textContent = input;
+  gameInfo.append(text)
+}
+
+createInfo(
+  'Welcome! \nThis is a hangman (word guessing) game \nTo play continue with pressing OK'
+);
 
 const keyboardKeys = [
   'a',
@@ -162,7 +175,7 @@ also show progress of the word if guess is right */
 
   for (let i = 0; i < secretWord.length; i++) {
     answerArr[i] = '_';
-    wordHtml = `${answerArr}`;
+    wordHtml = `${answerArr.join('')}`;
     word.innerHTML = wordHtml;
   }
 
@@ -231,7 +244,7 @@ also show progress of the word if guess is right */
       for (let j = 0; j < secretWord.length; j++) {
         if (secretWord[j] === userInput) {
           answerArr[j] = userInput;
-          wordHtml = `${answerArr}`;
+          wordHtml = `${answerArr.join('')}`;
           word.innerHTML = wordHtml;
           // decrease remaining letters in the word
           remainingLetters--;
