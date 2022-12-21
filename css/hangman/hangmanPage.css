@@ -9,13 +9,6 @@ main {
     margin: 2rem auto;
 }
 
-.welcome {
-    width: 100%;
-    height: 200px;
-    display: grid;
-    place-content: center;
-}
-
 #hangman h1 {
     font-size: calc(2vmin + 2.5vmax);
     font-family: Coolvetica;    
@@ -27,7 +20,6 @@ main {
 #hangman h2 {
     font-size: clamp(1.5rem, 2.5vw, 4rem); 
     text-align: center;
-    filter: drop-shadow(2px 2px rgba(255, 255, 255, 0.247));
 }
 
 #hangman > nav > ul > li > a {
@@ -39,7 +31,7 @@ main {
     padding: 2rem 1rem;
     max-width: 400px;
     min-width: 300px;
-    min-height: 200px;
+    min-height: 100%;
     background-color: #181818;
     display: block;
 }
@@ -94,7 +86,7 @@ main {
 .user_guess {
     position: relative;
     font-size: 1.2rem;
-    color: yellow;
+    color: #fafafa;
     text-align: center;
     text-transform: uppercase;
 }
@@ -102,6 +94,13 @@ main {
 .word_letter {
     padding: 0 0.25rem;
     font-size: 1.5rem;
+}
+
+.msg {
+    position: relative;
+    margin: 0.5rem 0;
+    text-align: center;
+    height:20px;
 }
 
 .btn_start {

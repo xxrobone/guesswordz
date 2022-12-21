@@ -19,18 +19,19 @@ let gameInfo = document.querySelector('.info');
 const keyboard = document.querySelector('.keyboard');
 const word = document.querySelector('.secret_word');
 const userGuess = document.querySelector('.user_guess');
-const alertMsg = document.querySelector('.alert');
-let wrongLetters = document.querySelector('.alert');
+const msg = document.querySelector('.msg');
+let wrongLetters = document.querySelector('.wrong_letters');
 
 function createInfo(input) {
+  gameInfo.innerHTML = '';
   let text = document.createElement('p');
   text.classList.add('text');
   text.textContent = input;
-  gameInfo.append(text)
+  gameInfo.append(text);
 }
 
 createInfo(
-  'Welcome! \nThis is a hangman (word guessing) game \nTo play continue with pressing OK'
+  'Welcome! \nThis is a hangman (word guessing) game \nTo play press START'
 );
 
 const keyboardKeys = [
@@ -181,8 +182,6 @@ also show progress of the word if guess is right */
 
   //creating guesses variable with 6 chances
   let guesses = 6;
-  // showing how many letter remain for the right word
-  let remainingLetters = secretWord.length;
 
   // Alert to show the info of the game
   /* alert(
@@ -193,18 +192,9 @@ also show progress of the word if guess is right */
       secretWord.length +
       ' characters long'
   ); */
-
-  let gameInfo = document.querySelector('.game_info');
-  let p = document.createElement('p');
-  p.textContent =
-    'Welcome! \nThis is a hangman (word guessing) game \nTo play continue with pressing OK' +
-    '\nThe word is ' +
-    answerArr +
-    ' : ' +
-    secretWord.length +
-    ' characters long';
-
-  gameInfo.append(p);
+  createInfo(
+    `The word is \n ${answerArr} : ${secretWord.length} characters long`
+  );
 
   // removing while function while i figure this one out
   /* while (remainingLetters > 0 && guesses > 0) { */
@@ -246,8 +236,6 @@ also show progress of the word if guess is right */
           answerArr[j] = userInput;
           wordHtml = `${answerArr.join('')}`;
           word.innerHTML = wordHtml;
-          // decrease remaining letters in the word
-          remainingLetters--;
         }
       }
     } else if (userInput === null || userInput === '') {
@@ -266,6 +254,11 @@ also show progress of the word if guess is right */
     else if (answerArr.includes(userInput) || usedLetters.includes(userInput)) {
       /* alert('You already used this letter'); */
       console.log('You already used this letter');
+      msg.textContent = 'You already used this letter';
+      setTimeout(function () {
+        msg.textContent = '';
+        // Every 3 sec
+      }, 2000);
     } else {
       // update the game progress guess is match to no match and -1 on guesses
       // also push the letter that is not included in the word to used letters array
