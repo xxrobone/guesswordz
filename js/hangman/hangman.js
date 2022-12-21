@@ -1,4 +1,5 @@
 let gameInfo = document.querySelector('.info');
+const startButton = document.querySelector('.btn_start');
 const keyboard = document.querySelector('.keyboard');
 const guessesLeft = document.querySelector('.guesses');
 const word = document.querySelector('.secret_word');
@@ -6,6 +7,19 @@ const userGuess = document.querySelector('.user_guess');
 const msg = document.querySelector('.msg');
 const keyMsg = document.querySelector('.key_msg > span');
 let wrongLetters = document.querySelector('.wrong_letters');
+
+startButton.addEventListener('click', function () {
+  gameInfo.innerHTML = '';
+  wrongLetters.textContent = '';
+  guesses = 6;
+  answerArr = [];
+  usedLetters = [];
+  wordHtml = '';
+  win = 'false';
+  userGuess.textContent = '';
+  wrongLetters.textContent = '';
+  gameLoop();
+});
 
 function createInfo(input) {
   gameInfo.innerHTML = '';
@@ -66,10 +80,6 @@ function c() {
   console.log('keyboard clicked');
 }
 keyboard.addEventListener('click', c);
-
-const startButton = document
-  .querySelector('.btn_start')
-  .addEventListener('click', gameLoop);
 
 // only using this short array, could be more words, could also use an api with words too fetch from
 const wordsArr = [
@@ -143,31 +153,59 @@ function randomWord(inputArr) {
   return randomWord;
 }
 
+function openBtns() {
+  let btns = document.querySelectorAll('.key_btn');
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].removeAttribute('disabled', false);
+    btns[i].style.pointerEvents = 'visible';
+  }
+}
+
+function closeBtns() {
+  let btns = document.querySelectorAll('.key_btn');
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].setAttribute('disabled', '');
+    btns[i].style.pointerEvents = 'none';
+  }
+}
+
+let guesses, answerArr, usedLetters, wordHtml, win, secretWord;
+
 // creating the game loop
 function gameLoop() {
+  // number of guesses
+  guesses = 6;
+  // creating an array to hold the right guessed letters
+  answerArr = [];
+  // used letters array, that is not included in the word
+  usedLetters = [];
+  // html variable to show the progress of the secret word
+  wordHtml = '';
+
+  secretWord = randomWord(wordsArr);
+  console.log(secretWord);
+
   keyboard.removeEventListener('click', c);
+
   let win = 'false';
+
+  startButton.textContent = 'restart';
+
+  if (startButton.textContent === 'restart') {
+    startButton.addEventListener('click', (e) => {
+      e.preventDefault();
+    });
+  }
+
   console.log('Game starts' + ' win is ' + win);
   // looping thru the array of buttons and removing the disabled attribute
   let btns = document.querySelectorAll('.key_btn');
+  openBtns();
+  /*
   for (let i = 0; i < btns.length; i++) {
     btns[i].removeAttribute('disabled');
     btns[i].style.pointerEvents = 'visible';
-  }
-  // take away the pointer events on the keyboard
-  // get a random word from the words array, one const ;)
-
-  const secretWord = randomWord(wordsArr);
-
-  console.log('this is the secret word: ' + secretWord);
-  // creating an array to hold the right guessed letters
-  let answerArr = [];
-
-  // used letters array, that is not included in the word
-  let usedLetters = [];
-
-  // html variable to show the progress of the secret word
-  let wordHtml = '';
+  } */
 
   /* looping thru the secret word and adding it to the answer array 
 so the player will see how many letters there is and
@@ -180,7 +218,6 @@ also show progress of the word if guess is right */
   }
 
   //creating guesses variable with 6 chances
-  let guesses = 6;
 
   guessesLeft.textContent = `You have ${guesses} guesses left`;
 
@@ -192,9 +229,11 @@ also show progress of the word if guess is right */
   btns.forEach((i) => {
     i.addEventListener('click', async (e) => {
       console.log(e.target.textContent);
-      userGuess.textContent = '';
       let letter = await e.target.textContent;
       userGuess.textContent = letter;
+      setTimeout(function () {
+        userGuess.textContent = '';
+      }, 2000);
       checkForMatch(letter);
       winOrLoss(guesses, win);
     });
@@ -219,9 +258,7 @@ also show progress of the word if guess is right */
           } else {
             console.log('words dont match');
           }
-
           console.log('win is : ' + win);
-
           msg.textContent = 'You got that one right ;D';
           setTimeout(function () {
             msg.textContent = '';
@@ -246,9 +283,6 @@ also show progress of the word if guess is right */
     }
   }
 
-  // game loop ending
-  console.log(guesses, win);
-  /* } */ //loop ending the while loop
   // game endings
   function winOrLoss(guesses, win) {
     if (guesses === 0) {
@@ -263,18 +297,26 @@ also show progress of the word if guess is right */
       let gameOverText = `
       <p>
         Game over </br>
-        Sorry You have no more guesses:  ${guesses} </br>
+        Sorry You have no more guesses left </br>
         The word was: ${secretWord.toUpperCase()} </br>
         Your guess progress ${answerArr.join(' ').toUpperCase()}
       </p>
       `;
       createInfo(gameOverText);
+      startButton.textContent = 'retry';
+      if (startButton.textContent === 'retry') {
+        startButton.addEventListener('click', (e) => {
+          e.preventDefault();
+        });
+      }
+
+      /*  closeBtns(); */
     } else if (guesses > 0 && win === 'true') {
       let winText = `
         <p>
         YOU WIN! </br>
         Good job buddy! The answer was:  ${secretWord.toUpperCase()} </br>
-        You had ${6 - guesses} guesses left :D
+        You had ${guesses} guesses left :D
         </p>
         `;
       createInfo(winText);
@@ -285,6 +327,13 @@ also show progress of the word if guess is right */
           '\nYour guess was: ' +
           answerArr.join('').toUpperCase()
       );
+      startButton.textContent = 'play again';
+      if (startButton.textContent === 'play again') {
+        startButton.addEventListener('click', (e) => {
+          e.preventDefault();
+        });
+      }
+      /*  closeBtns(); */
     } else {
       return;
     }
