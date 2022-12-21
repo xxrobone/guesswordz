@@ -28,7 +28,8 @@ function createInfo(input) {
 
 let welcomeText = `<p>
 Welcome! </br>
-This is a hangman(word guessing) game </Br>
+This is a word guessing game </Br>
+(like hangman if you played it before) </br>
 To play press START
 </p>
 `;

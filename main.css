@@ -37,27 +37,107 @@ a:hover {
 body {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--background-color);
+  background: radial-gradient(circle, rgba(87,87,87,1) 0%, rgba(0,0,0,1) 100%);
   display: flex;
   flex-direction: column;
+  align-content: center;
+  height: 700px;
+  font-family: Kenoky;
   font-family: Kenoky;
   overflow-x: hidden;
 }
 
-p {
-    font-size: clamp(1rem, 2.5vw, 2rem); 
-    color: #fafafa;
+#mainpage > header {
+  height: 100px;
+  border-top: 1px solid #888;
+  border-bottom: 1px solid #888;
+  background: linear-gradient(120deg, rgb(20, 20, 20), #0f0f0f, #020101, #1b1b1b, #000000);
+}
+
+#mainpage > header > h1 {
+       background: linear-gradient(120deg, rgb(49, 49, 49), #b4b4b4, #9b9b9b, #ffffff, #000000);
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent; 
+        -moz-text-fill-color: transparent;
+        font-weight: 800;
+        text-transform: uppercase;
+        transition: transform 1s ease;
+}
+
+
+h1 {
+  font-family: Kenoky;
+    font-size: clamp(3rem, 10vw, 4rem); 
+    line-height: 1.1s;
+    color: #000;
+    font-weight: 800;
 }
 
 h2 {
     /* font-family: Bebas; */
     font-size: clamp(1.5rem, 2.5vw, 4rem); 
-    color: orangered;
+    color: #000;
 }
 
-h1 {
-  /* font-family: Kenoky; */
-    font-size: clamp(3rem, 10vw, 4rem); 
-    line-height: 1.1s;
-    color: orangered;
+p {
+  font-size: clamp(1rem, 2.5vw, 2rem); 
+  color: #fafafa;
+}
+
+.container{
+  position: relative;
+  margin: 100px auto 0;
+  padding: 2rem 0.5rem;
+  width: 80%;
+  min-height: 500px;
+}
+
+h2.text-top {
+  position: absolute;
+  font-size: clamp(3rem, 10vw, 4rem); 
+  letter-spacing: 2px;
+}
+
+span {
+  margin-top: 50px;
+  font-family: 'Barlow';
+  font-family: Kenoky;
+  font-size: clamp(1.5rem, 2.5vw, 4rem);
+  font-weight: 100;
+  letter-spacing: 2px;
+  color: black;
+  padding: 1rem 0.5rem 0;
+}
+
+.text {
+  display: none;
+  animation: text-animation;
+  animation-direction: alternate;
+}
+
+@keyframes text-animation {
+  0% {
+    filter: blur(5px);
+    opacity: 0.3;
+  }
+  20% {
+    filter: blur(0);
+    opacity: 1;
+  }
+  80% {
+    filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(20px);
+    opacity: 0.3;
+  }
+}
+
+@media screen and (min-width:768px) {
+  .container {
+    width: 60%;
+  }
 }
