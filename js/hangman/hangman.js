@@ -135,7 +135,7 @@ function randomWord(inputArr) {
 // creating the game loop
 function gameLoop() {
   let win = 'false';
-  console.log('Game starts');
+  console.log('Game starts' + ' win is ' + win);
   // looping thru the array of buttons and removing the disabled attribute
   let btns = document.querySelectorAll('.key_btn');
   for (let i = 0; i < btns.length; i++) {
@@ -196,6 +196,18 @@ also show progress of the word if guess is right */
           wordHtml = `${answerArr.join('')}`;
           word.innerHTML = wordHtml;
 
+          console.log('the word so far : ' + answerArr.join(''));
+          console.log(typeof answerArr.join(''));
+
+          if (answerArr.join('') == secretWord) {
+            console.log('the words match');
+            win = 'true';
+          } else {
+            console.log('words dont match');
+          }
+
+          console.log('win is : ' + win);
+
           msg.textContent = 'You got that one right ;D';
           setTimeout(function () {
             msg.textContent = '';
@@ -210,10 +222,6 @@ also show progress of the word if guess is right */
       setTimeout(function () {
         msg.textContent = '';
       }, 2000);
-    } else if (answerArr.join('') === secretWord) {
-      win = 'true';
-      console.log(answerArr.join('') + ' is the right word YOU WIN');
-      console.log('is win? : ' + win);
     } else {
       // update the game progress guess is match to no match and -1 on guesses
       // also push the letter that is not included in the word to used letters array
