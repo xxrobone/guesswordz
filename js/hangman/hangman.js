@@ -15,9 +15,9 @@ startButton.addEventListener('click', function () {
   answerArr = [];
   usedLetters = [];
   wordHtml = '';
-  win = 'false';
   userGuess.textContent = '';
   wrongLetters.textContent = '';
+  win = undefined;
   gameLoop();
 });
 
@@ -170,6 +170,7 @@ function closeBtns() {
 }
 
 let guesses, answerArr, usedLetters, wordHtml, win, secretWord;
+console.log(win);
 
 // creating the game loop
 function gameLoop() {
@@ -187,7 +188,9 @@ function gameLoop() {
 
   keyboard.removeEventListener('click', c);
 
-  let win = 'false';
+  win = 'false';
+
+  console.log('Game starts' + ' win is ' + win);
 
   startButton.textContent = 'restart';
 
@@ -197,7 +200,6 @@ function gameLoop() {
     });
   }
 
-  console.log('Game starts' + ' win is ' + win);
   // looping thru the array of buttons and removing the disabled attribute
   let btns = document.querySelectorAll('.key_btn');
   openBtns();
@@ -328,6 +330,7 @@ also show progress of the word if guess is right */
           answerArr.join('').toUpperCase()
       );
       startButton.textContent = 'play again';
+      win = 'false';
       if (startButton.textContent === 'play again') {
         startButton.addEventListener('click', (e) => {
           e.preventDefault();
