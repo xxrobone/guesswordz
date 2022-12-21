@@ -2,11 +2,15 @@
 @import url('./keyboard.css');
 @import url('./../header.css');
 @import url('./../nav.css');
+@import url('./../buttons.css');
 
 
-main {
+#hangman > main {
     width: 100%;
     margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #hangman h1 {
@@ -111,7 +115,15 @@ main {
 }
 
 .btn_start {
-    
+    width: 60%;
+    margin: 1rem auto 0;
+    border: 1px solid orangered;
+}
+
+@media screen and (min-width: 768px) {
+    .btn_start {
+        max-width: 300px;
+    }
 }
 
 

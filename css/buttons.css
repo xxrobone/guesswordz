@@ -1,0 +1,95 @@
+
+
+/* button */
+
+.btn {
+    position: relative;
+outline: none;
+border: none;
+padding: 1rem 1.5rem;
+margin: 1rem;
+text-align: center;
+font-size: 1.5rem;
+border-radius: 5px;
+box-shadow: 0 4px 4px rgba(0,0,0,0.4);
+transition: all 0.2s;
+}
+
+.btn::after {
+content: "";
+display: inline-block;
+height: 100%;
+width: 100%;
+position: absolute;
+top: 0;
+left: 0;
+z-index: -1;
+}
+.btn:hover {
+transform: translateY(-3px);
+box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+
+}
+.btn:hover::after {
+transform: scale(1.055);
+}
+
+.btn:active {
+transform: translateY(-1px);
+box-shadow: 0 2px 2px rgba(0,0,0,0.4);
+}
+
+/* my special button */
+.btn_special {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    border: 0;
+    background: transparent;
+    color: #f8f8f8;
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+    border: 1px solid #3b3b3b;
+    border-radius: 25px;
+    align-self: start;
+    justify-self: start;
+  }
+
+  
+  .btn_special:hover::after, .btn_special:focus::after {
+    top: 0;
+    left: 0;
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.4);
+  }
+  
+  .btn_special::after {
+    content: '';
+    position: absolute;
+    background-color: orangered;
+    opacity: 0;
+    height: 1em;
+    width: 100%;
+    top: 1.5em;
+    left: 0;
+    z-index: -1;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    transform-origin: bottom left;
+    transition: all 0.3s cubic-bezier(0.45, 1.43, 0.72, 1.18);
+  }
+
+  .btn_special:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.4);
+}
+  
+.btn_special:active::after {
+    transform: translateY(0px);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}

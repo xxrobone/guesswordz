@@ -35,12 +35,16 @@
   }
 
 
-  .msg {
+  .key_msg {
     position: absolute;
     display: block;
     margin: 2rem auto 0;
-    color: tomato;
     bottom: 0;
+  }
+
+  .key_msg > span {
+    color: rgb(202, 33, 33);
+    border-bottom: 1px solid red;
   }
 
   

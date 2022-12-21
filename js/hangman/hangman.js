@@ -4,6 +4,7 @@ const guessesLeft = document.querySelector('.guesses');
 const word = document.querySelector('.secret_word');
 const userGuess = document.querySelector('.user_guess');
 const msg = document.querySelector('.msg');
+const keyMsg = document.querySelector('.key_msg > span');
 let wrongLetters = document.querySelector('.wrong_letters');
 
 function createInfo(input) {
@@ -52,9 +53,19 @@ keyboardKeys.map((letter) => {
   const button = document.createElement('button');
   button.classList.add('key_btn');
   button.setAttribute('disabled', '');
+  button.style.pointerEvents = 'none';
   button.textContent = letter;
   keyboard.append(button);
 });
+
+function c() {
+  keyMsg.textContent = 'you cant use the keyboard if you dont start the game';
+  setTimeout(function () {
+    keyMsg.textContent = '';
+  }, 3000);
+  console.log('keyboard clicked');
+}
+keyboard.addEventListener('click', c);
 
 const startButton = document
   .querySelector('.btn_start')
@@ -134,13 +145,16 @@ function randomWord(inputArr) {
 
 // creating the game loop
 function gameLoop() {
+  keyboard.removeEventListener('click', c);
   let win = 'false';
   console.log('Game starts' + ' win is ' + win);
   // looping thru the array of buttons and removing the disabled attribute
   let btns = document.querySelectorAll('.key_btn');
   for (let i = 0; i < btns.length; i++) {
     btns[i].removeAttribute('disabled');
+    btns[i].style.pointerEvents = 'visible';
   }
+  // take away the pointer events on the keyboard
   // get a random word from the words array, one const ;)
 
   const secretWord = randomWord(wordsArr);
@@ -260,7 +274,7 @@ also show progress of the word if guess is right */
         <p>
         YOU WIN! </br>
         Good job buddy! The answer was:  ${secretWord.toUpperCase()} </br>
-        Your guess progress ${answerArr.join(' ').toUpperCase()}
+        You had ${6 - guesses} guesses left :D
         </p>
         `;
       createInfo(winText);
