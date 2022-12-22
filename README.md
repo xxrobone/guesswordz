@@ -8,8 +8,9 @@ I chose vanilla js, I just want to practise to get better
 It´s been fun also challenging, redoing the assignment 2 which was a "hangman" console game to a dom game
 Changed the name to word guess, not doing any hanging...
 I also done a rock paper scissors
-- I stumbled on issues trying to create a restart functions button without
-reloading the page, something is wrong on this at the moment, I might fix it (if i find the sollution today is thu 22 dec 2022)
+- fixed issue with my restart button, function was called inside
+it instead of just resetting the values 
+
 - Adding to win or losses on players progress works, but when i restart the round/ game session score point system is not 
 resetting the values right and messes up second round
 
