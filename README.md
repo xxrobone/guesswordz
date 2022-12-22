@@ -15,6 +15,9 @@ resetting the values right and messes up second round
 
 - Quit button works on both games, and reloads page, which resets everything.
 
+- In the RPS game i added colors to console logs which was a nice thing, its easier to see and i see benefit of using this in the future
+for bot when code is run successfully or error handling. :D
+
 I try to make it semantic but it feels strange with a game, a lot of divs... div hell 
 
 still creating separate css files for header, footer, nav, buttons makes some stuff easier
