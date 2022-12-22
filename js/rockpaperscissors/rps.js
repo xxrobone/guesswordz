@@ -9,8 +9,8 @@ const quit = document.querySelector('.quit');
 let choices = document.querySelectorAll('.choices_wrapper > ul > li > i');
 
 // one way of going a score
-let playerscore = 0;
-let botscore = 0;
+let playerscore;
+let botscore;
 
 let wins = document.querySelector('.wins');
 let losses = document.querySelector('.losses');
@@ -27,14 +27,15 @@ startGame.addEventListener('click', () => {
   showText.textContent = '';
   showIcon.innerHTML = '';
   restart.style.display = 'none';
-  /* playerscore = 0;
-  botscore = 0; */
+  playerscore = 0;
+  botscore = 0;
   gamePlay();
 });
 
 function gamePlay() {
   /* playerScore.textContent = 0;
   botScore.textContent = 0; */
+  console.log(playerscore, botscore);
   startGame.textContent = 'playing...';
   startGame.classList.add('deactivate');
   restart.style.display = 'block';
@@ -47,6 +48,7 @@ function gamePlay() {
       const player = e.target.id;
       playerChoice(player);
       const bot = botChoice();
+      console.log('bot choice is: ' + bot);
       gameUI(playerUI(player), botUI(bot));
       gameRound(player, bot);
       winner(playerscore, botscore);
@@ -69,16 +71,11 @@ let choicesArr = ['rock', 'paper', 'scissors'];
 function playerChoice(choice) {
   let player = '';
   if (choice === 'rock') {
-    console.log('player choice rock');
     player = 'rock';
   } else if (choice === 'paper') {
-    console.log('player choice paper');
     player = 'paper';
-  } else if (choice === 'scissors') {
-    console.log('player choice scissors');
-    player = 'scissors';
   } else {
-    console.log('you must choose');
+    player = 'scissors';
   }
   return player;
 }
@@ -231,7 +228,9 @@ function winner(playerscore, botscore) {
       showIcon.innerHTML = '';
       showText.textContent = '';
       showResult.style.display = 'none';
-    }, 6000);
+      playerscore = undefined;
+      botscore = undefined;
+    }, 4000);
     showResult.style.display = 'block';
     showText.textContent = 'Congrats YOU WIN! \nOh happy day, oh happy day!';
     showText.style.fontSize = '3rem';
@@ -245,7 +244,9 @@ function winner(playerscore, botscore) {
       showIcon.innerHTML = '';
       showText.textContent = '';
       showResult.style.display = 'none';
-    }, 6000);
+      playerscore = undefined;
+      botscore = undefined;
+    }, 4000);
     playerLosses++;
     losses.textContent = playerLosses;
     console.log('player losses = ' + playerLosses);
@@ -287,7 +288,9 @@ restart.addEventListener('click', () => {
   botscore = 0;
   playerScore.textContent = 0;
   botScore.textContent = 0;
-  gamePlay();
+  choices.forEach((i) => {
+    i.classList.add('active');
+  });
 });
 
 quit.addEventListener('click', clearResult);
