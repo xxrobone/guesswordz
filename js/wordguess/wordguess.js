@@ -1,5 +1,6 @@
 let gameInfo = document.querySelector('.info');
 const startButton = document.querySelector('.btn_start');
+const quitButton = document.querySelector('.btn_quit');
 const keyboard = document.querySelector('.keyboard');
 const guessesLeft = document.querySelector('.guesses');
 const word = document.querySelector('.secret_word');
@@ -17,8 +18,14 @@ startButton.addEventListener('click', function () {
   wordHtml = '';
   userGuess.textContent = '';
   wrongLetters.textContent = '';
-  win = undefined;
+  win = false;
+  quitButton.style.display = 'block';
   gameLoop();
+});
+
+quitButton.addEventListener('click', () => {
+  /*  quitButton.style.display = 'none'; */
+  location.reload();
 });
 
 function createInfo(input) {

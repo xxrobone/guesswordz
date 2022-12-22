@@ -9,10 +9,8 @@ const quit = document.querySelector('.quit');
 let choices = document.querySelectorAll('.choices_wrapper > ul > li > i');
 
 // one way of going a score
-let score = {
-  player: 0,
-  bot: 0,
-};
+let playerscore = 0;
+let botscore = 0;
 
 let wins = document.querySelector('.wins');
 let losses = document.querySelector('.losses');
@@ -23,22 +21,20 @@ let playerLosses = 0;
 /* 
 playerWins++
 wins.textContent = playerWins */
-console.log('player score is ' + score.player + ' bot score is ' + score.bot);
 
 startGame.addEventListener('click', () => {
-  console.log(score.player + ' ' + score.bot);
   showResult.style.display = 'none';
   showText.textContent = '';
   showIcon.innerHTML = '';
   restart.style.display = 'none';
+  /* playerscore = 0;
+  botscore = 0; */
   gamePlay();
 });
 
 function gamePlay() {
-  score.player = 0;
-  score.bot = 0;
-  playerScore.textContent = 0;
-  botScore.textContent = 0;
+  /* playerScore.textContent = 0;
+  botScore.textContent = 0; */
   startGame.textContent = 'playing...';
   startGame.classList.add('deactivate');
   restart.style.display = 'block';
@@ -53,6 +49,7 @@ function gamePlay() {
       const bot = botChoice();
       gameUI(playerUI(player), botUI(bot));
       gameRound(player, bot);
+      winner(playerscore, botscore);
     });
   });
 }
@@ -172,8 +169,8 @@ function gameRound(player, bot) {
       );
     } else if (player === 'rock' && bot === 'scissors') {
       showText.textContent = 'Round goes to player!';
-      score.player++;
-      playerScore.textContent = score.player;
+      playerscore++;
+      playerScore.textContent = playerscore;
       console.log(
         '%c Player choice: ' +
           player +
@@ -184,8 +181,8 @@ function gameRound(player, bot) {
       );
     } else if (player === 'scissors' && bot === 'paper') {
       showText.textContent = 'Round goes to player!';
-      score.player++;
-      playerScore.textContent = score.player;
+      playerscore++;
+      playerScore.textContent = playerscore;
       console.log(
         '%c Player choice: ' +
           player +
@@ -196,8 +193,8 @@ function gameRound(player, bot) {
       );
     } else if (player === 'paper' && bot === 'rock') {
       showText.textContent = 'Round goes to player!';
-      score.player++;
-      playerScore.textContent = score.player;
+      playerscore++;
+      playerScore.textContent = playerscore;
       console.log(
         '%c Player choice: ' +
           player +
@@ -208,8 +205,8 @@ function gameRound(player, bot) {
       );
     } else {
       showText.textContent = 'Round goes to bot!';
-      score.bot++;
-      botScore.textContent = score.bot;
+      botscore++;
+      botScore.textContent = botscore;
       console.log(
         '%c Player choice: ' +
           player +
@@ -222,59 +219,54 @@ function gameRound(player, bot) {
   } else {
     console.log('No Choice is made must choose, rock or paper or scissors!');
   }
+  /*  */
+}
 
-  function winner() {
-    if (score.player === 3 && score.bot < 3) {
-      playerWins++;
-      wins.textContent = playerWins;
-      console.log('player wins = ' + playerWins);
-      setTimeout(() => {
-        showIcon.innerHTML = '';
-        showText.textContent = '';
-        showResult.style.display = 'none';
-        playerScore.textContent = score.player;
-        botScore.textContent = score.player;
-      }, 6000);
-      showResult.style.display = 'block';
-      showText.textContent = 'Congrats YOU WIN! \nOh happy day, oh happy day!';
-      showText.style.fontSize = '3rem';
-      restart.classList.add('tryagain');
-      restart.textContent = 'Try again?';
-      choices.forEach((i) => {
-        i.classList.remove('active');
-      });
-    } else if (score.bot === 3 && score.player < 3) {
-      setTimeout(() => {
-        showIcon.innerHTML = '';
-        showText.textContent = '';
-        showResult.style.display = 'none';
-        playerScore.textContent = score.player;
-        botScore.textContent = score.player;
-      }, 6000);
-      playerLosses++;
-      losses.textContent = playerLosses;
-      console.log('player losses = ' + playerLosses);
+function winner(playerscore, botscore) {
+  if (playerscore === 3 && botscore < 3) {
+    playerWins++;
+    wins.textContent = playerWins;
+    console.log('player wins = ' + playerWins);
+    setTimeout(() => {
+      showIcon.innerHTML = '';
+      showText.textContent = '';
+      showResult.style.display = 'none';
+    }, 6000);
+    showResult.style.display = 'block';
+    showText.textContent = 'Congrats YOU WIN! \nOh happy day, oh happy day!';
+    showText.style.fontSize = '3rem';
+    restart.classList.add('tryagain');
+    restart.textContent = 'Try again?';
+    choices.forEach((i) => {
+      i.classList.remove('active');
+    });
+  } else if (botscore === 3 && playerscore < 3) {
+    setTimeout(() => {
+      showIcon.innerHTML = '';
+      showText.textContent = '';
+      showResult.style.display = 'none';
+    }, 6000);
+    playerLosses++;
+    losses.textContent = playerLosses;
+    console.log('player losses = ' + playerLosses);
 
-      console.log('Round goes to bot! bot wins');
-      showResult.style.display = 'block';
-      showText.textContent =
-        'Sorry buddy! Bot is on fire today... try again ;D';
-      showText.style.fontSize = '3rem';
-      restart.classList.add('tryagain');
-      restart.textContent = 'Try again';
-      choices.forEach((i) => {
-        i.classList.remove('active');
-      });
-    } else {
-      setTimeout(() => {
-        showIcon.innerHTML = '';
-        showText.textContent = '';
-        showResult.style.display = 'none';
-      }, 2500);
-      return;
-    }
+    console.log('Round goes to bot! bot wins');
+    showResult.style.display = 'block';
+    showText.textContent = 'Sorry buddy! Bot is on fire today... try again ;D';
+    showText.style.fontSize = '3rem';
+    restart.classList.add('tryagain');
+    restart.textContent = 'Try again';
+    choices.forEach((i) => {
+      i.classList.remove('active');
+    });
+  } else {
+    setTimeout(() => {
+      showIcon.innerHTML = '';
+      showText.textContent = '';
+      showResult.style.display = 'none';
+    }, 2500);
+    return;
   }
-  winner();
 }
 
 function clearResult() {
@@ -284,14 +276,17 @@ function clearResult() {
 }
 
 restart.addEventListener('click', () => {
+  console.log(
+    'player score is : ' + playerscore + ' bot score is: ' + botscore
+  );
   restart.classList.remove('tryagain');
   restart.textContent = 'restart';
   startGame.textContent = 'playing...';
   startGame.classList.add('deactivate');
-  score.player = 0;
-  score.bot = 0;
-  playerScore.textContent = score.player;
-  botScore.textContent = score.player;
+  playerscore = 0;
+  botscore = 0;
+  playerScore.textContent = 0;
+  botScore.textContent = 0;
   gamePlay();
 });
 

@@ -130,10 +130,26 @@ body {
 }
 
 .btn_start {
-    width: 60%;
+    width: 40%;
     margin: 1rem auto 0;
     border: 1px solid orangered;
 }
+
+.btn_quit {
+    display: none;
+    color: whitesmoke;
+    width: 40%;
+    margin: 1rem auto 0;
+    border: 1px solid rgb(243, 239, 238);
+}
+
+.btn_quit:hover {
+    color: tomato;
+}
+
+.btn_quit.btn_special::after {
+    background-color: rgb(27, 27, 27);
+  }
 
 @media screen and (min-width: 768px) {
     .btn_start {
