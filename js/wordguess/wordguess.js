@@ -234,9 +234,14 @@ also show progress of the word if guess is right */
 
   guessesLeft.textContent = `You have ${guesses} guesses left`;
 
-  createInfo(
-    `The word is \n ${answerArr} : ${secretWord.length} characters long`
-  );
+  let secretEmptyWord = `
+        <p>
+      The word to guess </br> ${answerArr.join(' , ')}  
+        </br>is ${secretWord.length} characters long
+        </p>
+        `;
+
+  createInfo(secretEmptyWord);
 
   /* Player input on button click getting the textContent 'value'  */
   btns.forEach((i) => {
