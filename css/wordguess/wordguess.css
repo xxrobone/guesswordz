@@ -118,7 +118,7 @@ body {
 .guesses,
 .msg {
     position: relative;
-    height:20px;
+    height:40px;
     margin: 1rem 0;
     color: rgb(223, 149, 89);
     text-align: center;
