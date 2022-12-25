@@ -1,8 +1,6 @@
 footer {
-    position: absolute;
-    top: auto;
-    left: 0;
-    bottom: 0;
+    position: relative;
+    margin-top: auto;
     height: 60px;
     width: inherit;
     display: flex;
