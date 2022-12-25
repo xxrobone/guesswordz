@@ -146,7 +146,7 @@ h1 {
 
 i {
     position: relative;
-    font-size: calc(4vmin + 2vmax);
+    font-size: calc(6vmin + 2vmax);
     color: rgb(99, 107, 104);
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
@@ -177,30 +177,34 @@ i.small {
 .player_icon {
     position: absolute;
     transform: rotate(90deg);
-    left: 30%;
+    left: 25%;
     right: auto;
     color: lightgreen;
     animation-name: showPlayer;
-    animation-duration: .8s;
 }
 
 .bot_icon {
     position: absolute;
     transform: rotate(-90deg) scaleX(-1);
-    right: 30%;
+    right: 25%;
     left: auto;
     color: orangered;
     animation-name: showBot;
-    animation-duration: .8s;
 }
-
-
 
 .draw {
     position: absolute;
     color: rgba(214, 214, 49, 0.938);
     animation-name: showDraw;
+}
+
+.player_icon,
+.bot_icon,
+.draw {
+    filter: drop-shadow(1px 2px 1px rgba(0,0,0,0.75));
     animation-duration: .8s;
+    font-size: 5rem;
+
 }
 
 .score {
@@ -281,7 +285,7 @@ i.small {
       }
     
       to {
-          transform: translateX(0px);
+          transform: translateX(0px) scale(1);
       }
   }
 
@@ -291,7 +295,7 @@ i.small {
     }
   
     to {
-        transform: translateX(0px);
+        transform: translateX(0px) scale(1);
     }
   }
 
@@ -341,4 +345,12 @@ i.small {
     }
   }
 
+
+  @media screen and (min-width: 768px) {
+    .player_icon,
+    .bot_icon,
+    .draw {
+        font-size: 8rem;
+    }
+  }
 
