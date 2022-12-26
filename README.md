@@ -1,6 +1,6 @@
 # GAMEZ - assignment 3 CME- frontend
 
-creating a game using html, css and vanilla js or Jquery
+Creating a game (games) using html, css and vanilla js or Jquery
 I chose vanilla js, I just want to practise to get better
 
 ## Process, issues, thoughts
@@ -32,5 +32,15 @@ I have some trouble concentrating and making 2 projects and flipping between the
 
 https://xxrobone.github.io/gamez/
 
-I hope youlike the games, feel free to try them out in their current state
+I hope you (who ever sees this) like these classic games, feel free to try them out in their current state
+
+## Responsivness
+
+This page has been tested on 
+- Samsung 10 and 22
+- Iphone 5 and 7
+- Ipad pro
+- LG 55 oled (I mean why not with the tech today)
+
+And works fine on all these devices, LG tv game some hickups on the animations. 
 
