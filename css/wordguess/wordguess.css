@@ -140,6 +140,7 @@ body {
     border: 1px solid orangered;
 }
 
+.btn_restart,
 .btn_quit {
     position: relative;
     align-self: center;
@@ -160,17 +161,22 @@ body {
     background-color: rgb(27, 27, 27);
   }
 
-@media screen and (min-width: 768px) {
-    .btn_start {
-        max-width: 300px;
-    }
-    .btn_quit {
-        max-width: 300px;
-    }
+.btn_restart {
+    color: #121212;
+    background: rgb(255, 145, 71);
+}
+  .btn_restart:hover {
+    color: #121212;
+}
 
+
+@media screen and (min-width: 768px) {
+    .btn_start,
+    .btn_quit,
+    .btn_restart,
     .input_box,
     .secret_word {
-    max-width: 300px;
+        max-width: 300px;
     }
 }
 
