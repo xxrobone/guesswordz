@@ -1,6 +1,7 @@
 let gameInfo = document.querySelector('.info');
 const startButton = document.querySelector('.btn_start');
 const quitButton = document.querySelector('.btn_quit');
+const restartButton = document.querySelector('.btn_restart');
 const keyboard = document.querySelector('.keyboard');
 const guessesLeft = document.querySelector('.guesses');
 const word = document.querySelector('.secret_word');
@@ -10,27 +11,51 @@ const keyMsg = document.querySelector('.key_msg > span');
 let wrongLetters = document.querySelector('.wrong_letters');
 
 startButton.addEventListener('click', function () {
-  gameInfo.innerHTML = '';
-  wrongLetters.textContent = '';
-  guesses = 6;
+  resetHtmlValues();
+  setValues();
+  openBtns();
+  /* guesses = 6;
   answerArr = [];
   usedLetters = [];
   wordHtml = '';
-  userGuess.textContent = '';
-  wrongLetters.textContent = '';
-  win = false;
+  win = false; */
   quitButton.style.display = 'block';
+  restartButton.style.display = 'block';
   gameLoop();
 });
 
 quitButton.addEventListener('click', () => {
-  /*  quitButton.style.display = 'none'; */
   location.reload();
 });
 
-function createInfo(input) {
+restartButton.addEventListener('click', () => {
+  resetHtmlValues();
+  setValues();
+  openBtns();
+  startButton.textContent = 'guessing... again';
+  createEmtpySecretWord();
+  let againText = `
+        <p>
+        How nice you want an other try... 
+        The word to guess </br> ${answerArr.join(' , ')}  
+        </br>is ${secretWord.length} characters long
+        </p>
+        `;
+
+  createInfo(againText);
+  guessesLeftText(guesses);
+});
+
+function resetHtmlValues() {
   gameInfo.innerHTML = '';
-  gameInfo.innerHTML = input;
+  wrongLetters.textContent = '';
+  userGuess.textContent = '';
+}
+function createInfo(input = '') {
+  /* gameInfo.innerHTML = ''; */
+  setTimeout(() => {
+    gameInfo.innerHTML = input;
+  }, 300);
 }
 
 let welcomeText = `<p>
@@ -177,73 +202,82 @@ function closeBtns() {
   }
 }
 
-let guesses, answerArr, usedLetters, wordHtml, win, secretWord;
-console.log(win);
+let guesses, win, answerArr, usedLetters, wordHtml, secretWord;
 
-// creating the game loop
-function gameLoop() {
+function setValues() {
   // number of guesses
   guesses = 6;
+  // win is false, set to true if word is guesses
+  win = 'false';
   // creating an array to hold the right guessed letters
   answerArr = [];
   // used letters array, that is not included in the word
   usedLetters = [];
   // html variable to show the progress of the secret word
   wordHtml = '';
-
+  // setting the secret word to a word from the array of words
   secretWord = randomWord(wordsArr);
-  console.log(secretWord);
+  console.log('this is word from setting values: ' + secretWord);
+}
 
-  // open buttons
-  openBtns();
-
-  keyboard.removeEventListener('click', c);
-
-  win = 'false';
-
-  console.log('Game starts' + ' win is ' + win);
-
-  startButton.textContent = 'restart';
-
-  if (startButton.textContent === 'restart') {
-    startButton.addEventListener('click', (e) => {
-      e.preventDefault();
-    });
-  }
-
-  // looping thru the array of buttons and removing the disabled attribute
-  let btns = document.querySelectorAll('.key_btn');
-
-  /*
-  for (let i = 0; i < btns.length; i++) {
-    btns[i].removeAttribute('disabled');
-    btns[i].style.pointerEvents = 'visible';
-  } */
-
-  /* looping thru the secret word and adding it to the answer array 
-so the player will see how many letters there is and
-also show progress of the word if guess is right */
-
+function createEmtpySecretWord() {
   for (let i = 0; i < secretWord.length; i++) {
     answerArr[i] = '_';
     wordHtml = `${answerArr.join('')}`;
     word.innerHTML = wordHtml;
   }
+}
+
+function guessesLeftText(guesses) {
+  guessesLeft.textContent = `You have ${guesses} guesses left`;
+}
+
+// creating the game loop
+function gameLoop() {
+  //resetting values in beginning of gameloop
+  /* setValues(); */
+
+  // open buttons
+
+  keyboard.removeEventListener('click', c);
+  console.log('Game starts' + ' win is ' + win);
+  startButton.textContent = 'guessing...';
+  /* startButton.setAttribute('disabled', true); */
+  startButton.removeEventListener('click', gameLoop);
+  startButton.addEventListener('click', () => {
+    startButton.textContent = 'Disabled';
+    setTimeout(() => {
+      startButton.textContent = 'guessing...';
+    }, 1000);
+  });
+
+  /* looping thru the secret word and adding it to the answer array
+so the player will see how many letters there is and
+also show progress of the word if guess is right */
+
+  /* for (let i = 0; i < secretWord.length; i++) {
+    answerArr[i] = '_';
+    wordHtml = `${answerArr.join('')}`;
+    word.innerHTML = wordHtml;
+  } */
+  createEmtpySecretWord();
 
   //creating guesses variable with 6 chances
 
-  guessesLeft.textContent = `You have ${guesses} guesses left`;
+  /* guessesLeft.textContent = `You have ${guesses} guesses left`; */
+  guessesLeftText(guesses);
 
-  let secretEmptyWord = `
+  let secretEmptyWordText = `
         <p>
       The word to guess </br> ${answerArr.join(' , ')}  
         </br>is ${secretWord.length} characters long
         </p>
         `;
 
-  createInfo(secretEmptyWord);
+  createInfo(secretEmptyWordText);
 
   /* Player input on button click getting the textContent 'value'  */
+  let btns = document.querySelectorAll('.key_btn');
   btns.forEach((i) => {
     i.addEventListener('click', async (e) => {
       console.log(e.target.textContent);
@@ -321,13 +355,9 @@ also show progress of the word if guess is right */
       </p>
       `;
       createInfo(gameOverText);
+      startButton.textContent = 'Oh my restart?...';
+      startButton.setAttribute('disabled', true);
       closeBtns();
-      startButton.textContent = 'retry';
-      if (startButton.textContent === 'retry') {
-        startButton.addEventListener('click', (e) => {
-          e.preventDefault();
-        });
-      }
     } else if (guesses > 0 && win === 'true') {
       let winText = `
         <p>
@@ -345,13 +375,14 @@ also show progress of the word if guess is right */
           answerArr.join('').toUpperCase()
       );
       win = 'false';
+      startButton.textContent = 'Yeah buddy!';
+      startButton.style.color = '#6ec075';
+      setTimeout(() => {
+        startButton.textContent = 'restart? quit?';
+        startButton.style.color = 'inherit';
+      }, 3000);
+      startButton.setAttribute('disabled', true);
       closeBtns();
-      startButton.textContent = 'play again';
-      if (startButton.textContent === 'play again') {
-        startButton.addEventListener('click', (e) => {
-          e.preventDefault();
-        });
-      }
     } else {
       return;
     }
