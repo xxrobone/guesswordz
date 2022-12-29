@@ -217,7 +217,7 @@ function setValues() {
   wordHtml = '';
   // setting the secret word to a word from the array of words
   secretWord = randomWord(wordsArr);
-  console.log('this is word from setting values: ' + secretWord);
+  /* console.log('this is word from setting values: ' + secretWord); */
 }
 
 function createEmtpySecretWord() {
